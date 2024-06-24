@@ -4,7 +4,7 @@ import { auth, fs } from '../Config/Config';
 const ViewMarks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [currentCourses, setCurrentCourses] = useState([]);
   const [selectedCourseMarks, setSelectedCourseMarks] = useState(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ViewMarks = () => {
           const studentDoc = await fs.collection('students').doc(currentUser.uid).get();
           if (studentDoc.exists) {
             const studentData = studentDoc.data();
-            const enrolledCoursesIds = studentData.enrolledCourses || [];
+            const enrolledCoursesIds = studentData.currentCourses || [];
             console.log('Enrolled Courses IDs:', enrolledCoursesIds);
 
             // Fetch details of each enrolled course from assignCourses
@@ -37,12 +37,14 @@ const ViewMarks = () => {
                   const courseData = courseDoc.data();
                   console.log(`Course Data for ${actualCourseId}:`, courseData);
                   return {
+                    assignCourseId: courseId, // Use this ID for marks fetching
                     courseId: actualCourseId,
                     courseName: courseData.name || 'Unknown Course',
                   };
                 } else {
                   console.error(`Course document for ID ${actualCourseId} does not exist.`);
                   return {
+                    assignCourseId: courseId,
                     courseId: actualCourseId,
                     courseName: 'Unknown Course',
                   };
@@ -50,13 +52,14 @@ const ViewMarks = () => {
               } else {
                 console.error(`AssignCourse document for ID ${courseId} does not exist.`);
                 return {
+                  assignCourseId: courseId,
                   courseId: courseId,
                   courseName: 'Unknown Course',
                 };
               }
             }));
 
-            setEnrolledCourses(assignCoursesData);
+            setCurrentCourses(assignCoursesData);
           } else {
             setError('Student data not found');
           }
@@ -74,10 +77,11 @@ const ViewMarks = () => {
     fetchEnrolledCourses();
   }, []);
 
-  const handleViewMarks = async (courseId) => {
+  const handleViewMarks = async (assignCourseId) => {
     try {
+      console.log(assignCourseId);
       // Fetch marks for the selected course and logged-in student
-      const marksDoc = await fs.collection('studentsMarks').doc(courseId).get();
+      const marksDoc = await fs.collection('studentsMarks').doc(assignCourseId).get();
       if (marksDoc.exists) {
         const marksData = marksDoc.data();
         console.log('Marks Data:', marksData);
@@ -115,7 +119,7 @@ const ViewMarks = () => {
   return (
     <div>
       <h2>Student Portal</h2>
-      {enrolledCourses.length > 0 ? (
+      {currentCourses.length > 0 ? (
         <table>
           <thead>
             <tr>
@@ -125,12 +129,12 @@ const ViewMarks = () => {
             </tr>
           </thead>
           <tbody>
-            {enrolledCourses.map((course) => (
-              <tr key={course.courseId}>
+            {currentCourses.map((course) => (
+              <tr key={course.assignCourseId}>
                 <td>{course.courseId}</td>
                 <td>{course.courseName}</td>
                 <td>
-                  <button onClick={() => handleViewMarks(course.courseId)}>View Marks</button>
+                  <button onClick={() => handleViewMarks(course.assignCourseId)}>View Marks</button>
                 </td>
               </tr>
             ))}
