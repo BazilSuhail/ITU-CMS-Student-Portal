@@ -98,6 +98,7 @@ const CheckAttendance = () => {
               <tbody>
                 {enrolledCourses.map((course) => (
                   <tr key={course.assignCourseId}>
+                    <td>{course.assignCourseId}</td>
                     <td>{course.className}</td>
                     <td>{course.courseName}</td>
                     <td>{course.instructorName}</td>

@@ -7,6 +7,8 @@ import CheckAttendance from "./Components/CheckAttendance";
 import StudentAttendanceDetails from "./Components/StudentAttendanceDetails"; 
 import EnrolledCourses from "./Components/EnrolledCourses";
 import ViewMarks from "./Components/ViewMarks";
+import ShowCompletedCourses from "./Components/CompletedCourses";
+import WithdrawCourses from "./Components/WithdrawCourses";
 
 const App = () => {
   return (
@@ -16,7 +18,13 @@ const App = () => {
         {/*<Route exact path="/registerdepartment" element={<RegisterDepartment />} /> */}
 
         <Route path="/student-profile" element={<StudentProfile />} />
+        
+
+        <Route exact path="/completedcourses" element={<ShowCompletedCourses />} />
         <Route exact path="/signin" element={<SignIn />} />
+        <Route exact path="/withdrawcourses" element={<WithdrawCourses />} />
+        
+
         <Route exact path="/checktattendance" element={<CheckAttendance />} />
         <Route exact path="/enrollcourses" element={<EnrolledCourses />} />
         <Route exact path="/viewmarks" element={<ViewMarks />} />

@@ -13,48 +13,43 @@ const ViewMarks = () => {
       setError(null);
 
       try {
-        // Get the currently authenticated user
         const currentUser = auth.currentUser;
 
         if (currentUser) {
-          // Fetch the user data from Firestore to get enrolled courses
           const studentDoc = await fs.collection('students').doc(currentUser.uid).get();
           if (studentDoc.exists) {
             const studentData = studentDoc.data();
             const enrolledCoursesIds = studentData.currentCourses || [];
-            console.log('Enrolled Courses IDs:', enrolledCoursesIds);
 
-            // Fetch details of each enrolled course from assignCourses
             const assignCoursesData = await Promise.all(enrolledCoursesIds.map(async courseId => {
               const assignCourseDoc = await fs.collection('assignCourses').doc(courseId).get();
               if (assignCourseDoc.exists) {
                 const assignCourseData = assignCourseDoc.data();
-                const actualCourseId = assignCourseData.courseId;
+                const { courseId: actualCourseId, instructorId, classId } = assignCourseData;
 
-                // Fetch course name using the actualCourseId from the courses collection
                 const courseDoc = await fs.collection('courses').doc(actualCourseId).get();
-                if (courseDoc.exists) {
-                  const courseData = courseDoc.data();
-                  console.log(`Course Data for ${actualCourseId}:`, courseData);
-                  return {
-                    assignCourseId: courseId, // Use this ID for marks fetching
-                    courseId: actualCourseId,
-                    courseName: courseData.name || 'Unknown Course',
-                  };
-                } else {
-                  console.error(`Course document for ID ${actualCourseId} does not exist.`);
-                  return {
-                    assignCourseId: courseId,
-                    courseId: actualCourseId,
-                    courseName: 'Unknown Course',
-                  };
-                }
+                const instructorDoc = await fs.collection('instructors').doc(instructorId).get();
+                const classDoc = await fs.collection('classes').doc(classId).get();
+                const courseData = courseDoc.exists ? courseDoc.data() : {};
+                const instructorData = instructorDoc.exists ? instructorDoc.data() : {};
+                const classData = classDoc.exists ? classDoc.data() : {};
+
+                return {
+                  assignCourseId: courseId,
+                  courseId: actualCourseId,
+                  courseName: courseData.name || 'Unknown Course',
+                  creditHours: courseData.creditHours || 'Unknown',
+                  instructorName: instructorData.name || 'Unknown Instructor',
+                  className: classData.name || 'Unknown Class',
+                };
               } else {
-                console.error(`AssignCourse document for ID ${courseId} does not exist.`);
                 return {
                   assignCourseId: courseId,
                   courseId: courseId,
                   courseName: 'Unknown Course',
+                  creditHours: 'Unknown',
+                  instructorName: 'Unknown Instructor',
+                  className: 'Unknown Class',
                 };
               }
             }));
@@ -67,7 +62,6 @@ const ViewMarks = () => {
           setError('No authenticated user found');
         }
       } catch (error) {
-        console.error('Error fetching enrolled courses:', error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -79,20 +73,17 @@ const ViewMarks = () => {
 
   const handleViewMarks = async (assignCourseId) => {
     try {
-      console.log(assignCourseId);
-      // Fetch marks for the selected course and logged-in student
       const marksDoc = await fs.collection('studentsMarks').doc(assignCourseId).get();
       if (marksDoc.exists) {
         const marksData = marksDoc.data();
-        console.log('Marks Data:', marksData);
 
-        // Find marks for the logged-in student
         const studentMarks = marksData.marksOfStudents.find(student => student.studentId === auth.currentUser.uid);
 
         if (studentMarks) {
           setSelectedCourseMarks({
             criteriaDefined: marksData.criteriaDefined || [],
             studentMarks: studentMarks.marks || {},
+            grade: studentMarks.grade || 'I',
           });
         } else {
           setSelectedCourseMarks(null);
@@ -103,9 +94,17 @@ const ViewMarks = () => {
         setError('Marks document not found');
       }
     } catch (error) {
-      console.error('Error fetching marks:', error);
       setError(error.message);
     }
+  };
+
+  const calculateTotalWeightedMarks = () => {
+    if (!selectedCourseMarks) return 0;
+    return selectedCourseMarks.criteriaDefined.reduce((total, criterion) => {
+      const obtainedMarks = selectedCourseMarks.studentMarks[criterion.assessment] || 0;
+      const weightage = parseFloat(criterion.weightage) || 0;
+      return total + ((obtainedMarks / criterion.totalMarks) * weightage);
+    }, 0).toFixed(2);
   };
 
   if (loading) {
@@ -125,6 +124,9 @@ const ViewMarks = () => {
             <tr>
               <th>Course ID</th>
               <th>Course Name</th>
+              <th>Credit Hours</th>
+              <th>Instructor Name</th>
+              <th>Class Name</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -133,6 +135,9 @@ const ViewMarks = () => {
               <tr key={course.assignCourseId}>
                 <td>{course.courseId}</td>
                 <td>{course.courseName}</td>
+                <td>{course.creditHours}</td>
+                <td>{course.instructorName}</td>
+                <td>{course.className}</td>
                 <td>
                   <button onClick={() => handleViewMarks(course.assignCourseId)}>View Marks</button>
                 </td>
@@ -147,20 +152,44 @@ const ViewMarks = () => {
       {selectedCourseMarks && (
         <div>
           <h3>Marks for Selected Course</h3>
+          <div>
+            <h4>Criteria</h4>
+            <ul>
+              {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
+                <li key={index}>
+                  {criterion.assessment} - Weightage: {criterion.weightage}%, Total Marks: {criterion.totalMarks}
+                </li>
+              ))}
+            </ul>
+          </div>
           <table>
             <thead>
               <tr>
                 <th>Criteria</th>
-                <th>Marks</th>
+                <th>Obtained Marks</th>
+                <th>Total Marks</th>
+                <th>Weighted Marks</th>
               </tr>
             </thead>
             <tbody>
               {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
                 <tr key={index}>
-                  <td>{criterion.subject} ({criterion.weightage}%)</td>
-                  <td>{selectedCourseMarks.studentMarks[criterion.subject]}</td>
+                  <td>{criterion.assessment}</td>
+                  <td>{selectedCourseMarks.studentMarks[criterion.assessment]}</td>
+                  <td>{criterion.totalMarks}</td>
+                  <td>
+                    {(selectedCourseMarks.studentMarks[criterion.assessment] / criterion.totalMarks * criterion.weightage).toFixed(2)}
+                  </td>
                 </tr>
               ))}
+              <tr>
+                <td colSpan="3"><strong>Total Weighted Marks</strong></td>
+                <td><strong>{calculateTotalWeightedMarks()}</strong></td>
+              </tr>
+              <tr>
+                <td colSpan="3"><strong>Grade</strong></td>
+                <td><strong>{selectedCourseMarks.grade}</strong></td>
+              </tr>
             </tbody>
           </table>
         </div>
