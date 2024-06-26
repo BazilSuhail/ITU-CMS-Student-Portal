@@ -9,6 +9,7 @@ import EnrolledCourses from "./Components/EnrolledCourses";
 import ViewMarks from "./Components/ViewMarks";
 import ShowCompletedCourses from "./Components/CompletedCourses";
 import WithdrawCourses from "./Components/WithdrawCourses";
+import MarksOfSubject from "./Components/MarksOfSubject";
 
 const App = () => {
   return (
@@ -28,6 +29,10 @@ const App = () => {
         <Route exact path="/checktattendance" element={<CheckAttendance />} />
         <Route exact path="/enrollcourses" element={<EnrolledCourses />} />
         <Route exact path="/viewmarks" element={<ViewMarks />} />
+
+        <Route path="/marks/:courseName" element={<MarksOfSubject />} />
+        
+
         <Route exact path="/studentattendanceportal" element={<StudentAttendanceDetails />} />
 
       </Routes>

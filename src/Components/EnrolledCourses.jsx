@@ -7,6 +7,7 @@ const EnrolledCourses = () => {
   const [error, setError] = useState(null);
   const [courses, setCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [completedCourses, setCompletedCourses] = useState([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -19,11 +20,22 @@ const EnrolledCourses = () => {
         if (user) {
           setCurrentUser(user);
 
-          // Fetch student data to get enrolled courses
+          // Fetch student data to get enrolled and completed courses
           const studentDoc = await fs.collection('students').doc(user.uid).get();
           if (studentDoc.exists) {
             const studentData = studentDoc.data();
             setEnrolledCourses(studentData.enrolledCourses || []);
+            const completedCoursesIds = studentData.completedCourses || [];
+
+            // Fetch completed courses names
+            const completedCoursesNames = await Promise.all(
+              completedCoursesIds.map(async (courseId) => {
+                const courseDoc = await fs.collection('courses').doc(courseId).get();
+                return courseDoc.exists ? courseDoc.data().name : 'Unknown Course';
+              })
+            );
+
+            setCompletedCourses(completedCoursesNames);
           }
 
           // Fetch assignCourses data
@@ -40,6 +52,7 @@ const EnrolledCourses = () => {
               className: classDoc.data().name,
             };
           }));
+
           setCourses(coursesData);
         } else {
           setError('No user logged in');
@@ -82,6 +95,9 @@ const EnrolledCourses = () => {
     return <p>Error: {error}</p>;
   }
 
+  // Filter out the courses that are in the completed courses list
+  const filteredCourses = courses.filter(course => !completedCourses.includes(course.courseName));
+
   return (
     <div>
       <h2>Enroll in Courses</h2>
@@ -99,7 +115,7 @@ const EnrolledCourses = () => {
               </tr>
             </thead>
             <tbody>
-              {courses.map((course) => (
+              {filteredCourses.map((course) => (
                 <tr key={course.id}>
                   <td>{course.courseName}</td>
                   <td>{course.instructorName}</td>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth, fs } from '../Config/Config';
 
 const ViewMarks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentCourses, setCurrentCourses] = useState([]);
-  const [selectedCourseMarks, setSelectedCourseMarks] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
@@ -71,128 +72,81 @@ const ViewMarks = () => {
     fetchEnrolledCourses();
   }, []);
 
-  const handleViewMarks = async (assignCourseId) => {
+  const handleViewMarks = async (course) => {
+    let selectedCourseMarks = null;
+    let errorMessage = null;
+
     try {
-      const marksDoc = await fs.collection('studentsMarks').doc(assignCourseId).get();
+      const marksDoc = await fs.collection('studentsMarks').doc(course.assignCourseId).get();
       if (marksDoc.exists) {
         const marksData = marksDoc.data();
 
         const studentMarks = marksData.marksOfStudents.find(student => student.studentId === auth.currentUser.uid);
 
         if (studentMarks) {
-          setSelectedCourseMarks({
+          selectedCourseMarks = {
             criteriaDefined: marksData.criteriaDefined || [],
             studentMarks: studentMarks.marks || {},
             grade: studentMarks.grade || 'I',
-          });
+          };
         } else {
-          setSelectedCourseMarks(null);
-          setError('Marks not found for the logged-in student');
+          errorMessage = `No records for ${course.courseName} found.`;
         }
       } else {
-        setSelectedCourseMarks(null);
-        setError('Marks document not found');
+        errorMessage = `No records for ${course.courseName} found.`;
       }
     } catch (error) {
-      setError(error.message);
+      errorMessage = error.message;
     }
-  };
 
-  const calculateTotalWeightedMarks = () => {
-    if (!selectedCourseMarks) return 0;
-    return selectedCourseMarks.criteriaDefined.reduce((total, criterion) => {
-      const obtainedMarks = selectedCourseMarks.studentMarks[criterion.assessment] || 0;
-      const weightage = parseFloat(criterion.weightage) || 0;
-      return total + ((obtainedMarks / criterion.totalMarks) * weightage);
-    }, 0).toFixed(2);
+    navigate(`/marks/${course.courseName}`, {
+      state: {
+        selectedCourseMarks,
+        courseName: course.courseName,
+        errorMessage,
+      },
+    });
   };
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
   return (
     <div>
       <h2>Student Portal</h2>
       {currentCourses.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Course ID</th>
-              <th>Course Name</th>
-              <th>Credit Hours</th>
-              <th>Instructor Name</th>
-              <th>Class Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentCourses.map((course) => (
-              <tr key={course.assignCourseId}>
-                <td>{course.courseId}</td>
-                <td>{course.courseName}</td>
-                <td>{course.creditHours}</td>
-                <td>{course.instructorName}</td>
-                <td>{course.className}</td>
-                <td>
-                  <button onClick={() => handleViewMarks(course.assignCourseId)}>View Marks</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No enrolled courses found.</p>
-      )}
-
-      {selectedCourseMarks && (
-        <div>
-          <h3>Marks for Selected Course</h3>
-          <div>
-            <h4>Criteria</h4>
-            <ul>
-              {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
-                <li key={index}>
-                  {criterion.assessment} - Weightage: {criterion.weightage}%, Total Marks: {criterion.totalMarks}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <>
           <table>
             <thead>
               <tr>
-                <th>Criteria</th>
-                <th>Obtained Marks</th>
-                <th>Total Marks</th>
-                <th>Weighted Marks</th>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Credit Hours</th>
+                <th>Instructor Name</th>
+                <th>Class Name</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
-                <tr key={index}>
-                  <td>{criterion.assessment}</td>
-                  <td>{selectedCourseMarks.studentMarks[criterion.assessment]}</td>
-                  <td>{criterion.totalMarks}</td>
+              {currentCourses.map((course) => (
+                <tr key={course.assignCourseId}>
+                  <td>{course.courseId}</td>
+                  <td>{course.courseName}</td>
+                  <td>{course.creditHours}</td>
+                  <td>{course.instructorName}</td>
+                  <td>{course.className}</td>
                   <td>
-                    {(selectedCourseMarks.studentMarks[criterion.assessment] / criterion.totalMarks * criterion.weightage).toFixed(2)}
+                    <button onClick={() => handleViewMarks(course)}>View Marks</button>
                   </td>
                 </tr>
               ))}
-              <tr>
-                <td colSpan="3"><strong>Total Weighted Marks</strong></td>
-                <td><strong>{calculateTotalWeightedMarks()}</strong></td>
-              </tr>
-              <tr>
-                <td colSpan="3"><strong>Grade</strong></td>
-                <td><strong>{selectedCourseMarks.grade}</strong></td>
-              </tr>
             </tbody>
           </table>
-        </div>
+          {error && <p style={{ color: 'red', marginTop: '20px' }}>Error: {error}</p>}
+        </>
+      ) : (
+        <p>No enrolled courses found.</p>
       )}
     </div>
   );
