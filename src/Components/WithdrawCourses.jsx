@@ -3,16 +3,12 @@ import { auth, fs, FieldValue } from '../Config/Config';
 
 const WithdrawCourses = () => {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [currentCourses, setCurrentCourses] = useState([]);
-    const [withdrawCourses, setWithdrawCourses] = useState([]);
     const [currentCoursesData, setCurrentCoursesData] = useState([]);
     const [withdrawCoursesData, setWithdrawCoursesData] = useState([]);
 
     useEffect(() => {
         const fetchCourses = async () => {
             setLoading(true);
-            setError(null);
 
             try {
                 const currentUser = auth.currentUser;
@@ -66,8 +62,7 @@ const WithdrawCourses = () => {
 
                         const currentCourses = await Promise.all(courseDataPromises);
                         const withdrawCourses = await Promise.all(withdrawCourseDataPromises);
-                        setCurrentCourses(enrolledCourseIds);
-                        setWithdrawCourses(appliedWithdrawCourseIds);
+
                         setCurrentCoursesData(currentCourses.filter(course => course !== null));
                         setWithdrawCoursesData(withdrawCourses.filter(course => course !== null));
                     } else {
@@ -99,8 +94,12 @@ const WithdrawCourses = () => {
                 withdrawCourses: FieldValue.arrayUnion(assignCourseId),
             });
 
-            setCurrentCourses((prev) => prev.filter(id => id !== assignCourseId));
-            setWithdrawCourses((prev) => [...prev, assignCourseId]);
+            setWithdrawCoursesData(prevWithdrawCourses => {
+                return [...prevWithdrawCourses, currentCoursesData.find(course => course.assignCourseId === assignCourseId)];
+            });
+            setCurrentCoursesData(prevCurrentCourses => {
+                return prevCurrentCourses.filter(course => course.assignCourseId !== assignCourseId);
+            });
         } catch (error) {
             alert(error.message);
         }
