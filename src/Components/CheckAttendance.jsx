@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { auth, fs } from '../Config/Config';
-import StudentAttendanceDetails from './StudentAttendanceDetails';
+import { useNavigate } from 'react-router-dom';
 
 const CheckAttendance = () => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
-  const [selectedCourseId, setSelectedCourseId] = useState(null);
 
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
@@ -67,56 +67,59 @@ const CheckAttendance = () => {
   }, []);
 
   const handleViewAttendance = (courseId) => {
-    setSelectedCourseId(courseId);
+    navigate(`/attendance/${courseId}`);
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
   return (
-    <div>
-      <h2>Check Attendance</h2>
-      {currentUser && (
+    <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
+      <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Student's Attendance</h2>
+
+      <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
         <div>
-          <p><strong>User ID:</strong> {currentUser.uid}</p>
-          <p><strong>Email:</strong> {currentUser.email}</p>
-          {enrolledCourses.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Class Name</th>
-                  <th>Course Name</th>
-                  <th>Instructor Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {enrolledCourses.map((course) => (
-                  <tr key={course.assignCourseId}>
-                    <td>{course.assignCourseId}</td>
-                    <td>{course.className}</td>
-                    <td>{course.courseName}</td>
-                    <td>{course.instructorName}</td>
-                    <td>
-                      <button onClick={() => handleViewAttendance(course.assignCourseId)}>
-                        View Attendance
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No enrolled courses found.</p>
+          {currentUser && (
+            <div>
+              {enrolledCourses.length > 0 ? (
+                <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-100 rounded-xl overflow-x-auto'>
+                  <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <h2 className='text-2xl text-custom-blue mb-[8px] font-bold '>Attendance Records</h2>
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                          <th scope="col" className="whitespace-nowrap text-center  px-6 py-3">Course Name</th>
+                          <th scope="col" className="whitespace-nowrap text-center  px-6 py-3">Class Name</th>
+                          <th scope="col" className="whitespace-nowrap text-center  px-6 py-3">Instructor Name</th>
+                          <th scope="col" className="whitespace-nowrap text-center  px-6 py-3">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {enrolledCourses.map((course) => (
+                          <tr key={course.assignCourseId} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
+                            <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{course.courseName}</th>
+                            <td className="whitespace-nowrap text-center px-6 py-4">{course.className}</td>
+                            <td className="whitespace-nowrap text-center  px-6 py-4">{course.instructorName}</td>
+                            <td className="whitespace-nowrap text-center  px-6 py-4">
+                              <button onClick={() => handleViewAttendance(course.assignCourseId)} className="whitespace-nowrap bg-custom-blue hover:bg-white hover:border-2 hover:text-custom-blue text-md py-[8px] px-[12px] font-semibold text-white rounded-xl" >
+                                View Attendance
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : (
+                <p>No enrolled courses found.</p>
+              )}
+            </div>
           )}
         </div>
       )}
-      {selectedCourseId && <StudentAttendanceDetails assignCourseId={selectedCourseId} />}
     </div>
   );
 };

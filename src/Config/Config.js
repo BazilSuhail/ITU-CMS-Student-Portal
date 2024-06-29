@@ -5,7 +5,13 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
  
 const firebaseConfig = {
-  
+  apiKey: "AIzaSyDRP96EEIvRwEzrQeK8tXIVWAySxKM9338",
+  authDomain: "cms-itu.firebaseapp.com",
+  projectId: "cms-itu",
+  storageBucket: "cms-itu.appspot.com",
+  messagingSenderId: "112672700741",
+  appId: "1:112672700741:web:0c11082bcb3f198695a62c",
+  measurementId: "G-T4R52J7F6W"
 };
  
 firebase.initializeApp(firebaseConfig);

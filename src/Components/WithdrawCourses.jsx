@@ -105,69 +105,81 @@ const WithdrawCourses = () => {
         }
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <div>
-            <h2>Withdraw Courses</h2>
+        <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
+            <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Withdraw Courses</h2>
 
-            {currentCoursesData.length > 0 ? (
+            <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+            {loading ? (
+                <p>Loading...</p>
+            ) :
                 <div>
-                    <h3>Current Courses</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Course Name</th>
-                                <th>Instructor Name</th>
-                                <th>Class Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentCoursesData.map((course) => (
-                                <tr key={course.assignCourseId}>
-                                    <td>{course.courseName}</td>
-                                    <td>{course.instructorName}</td>
-                                    <td>{course.className}</td>
-                                    <td>
-                                        <button onClick={() => handleWithdraw(course.assignCourseId)}>Apply for Withdraw</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            ) : (
-                <p>No current courses found.</p>
-            )}
 
-            {withdrawCoursesData.length > 0 ? (
-                <div>
-                    <h3>Courses Applied for Withdraw</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Course Name</th>
-                                <th>Instructor Name</th>
-                                <th>Class Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {withdrawCoursesData.map((course) => (
-                                <tr key={course.assignCourseId}>
-                                    <td>{course.courseName}</td>
-                                    <td>{course.instructorName}</td>
-                                    <td>{course.className}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {currentCoursesData.length > 0 ? (
+                        <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-200 rounded-xl overflow-x-auto'>
+                            <h2 className='text-2xl text-custom-blue mb-[8px] font-bold '>Courses Enrolled</h2>
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                <table class="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead class="text-md text-gray-200 uppercase bg-gray-700">
+                                        <tr className='text-center'>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Course Name</th>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Instructor Name</th>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Class Enrolled In</th>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {currentCoursesData.map((course) => (
+                                            <tr key={course.assignCourseId} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
+                                                <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{course.courseName}</th>
+                                                <td className="px-6 py-4">{course.instructorName}</td>
+                                                <td className="px-6 py-4">{course.className}</td>
+                                                <td className="whitespace-nowrap text-center  px-6 py-4">
+                                                    <button onClick={() => handleWithdraw(course.assignCourseId)} className="whitespace-nowrap bg-custom-blue hover:bg-white hover:border-2 hover:text-custom-blue text-md py-[8px] px-[12px] font-semibold text-white rounded-xl" >
+                                                        Withdraw Course
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : (
+                        <p>No current courses found.</p>
+                    )}
+
+                    {withdrawCoursesData.length > 0 ? (
+                        <div className='mt-[28px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-200 rounded-xl overflow-x-auto'>
+                            <h2 className='text-2xl text-custom-blue mb-[8px] font-bold '>Courses Applied For Withdraw</h2>
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                <table class="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead class="text-md text-gray-200 uppercase bg-gray-700">
+                                        <tr className='text-center'>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Course Name</th>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Instructor Name</th>
+                                            <th scope="col" class="whitespace-nowrap px-6 py-3">Class Enrolled In</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {withdrawCoursesData.map((course) => (
+                                            <tr key={course.assignCourseId} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
+                                                <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap">{course.courseName}</th>
+                                                <td className="px-6 py-4">{course.instructorName}</td>
+                                                <td className="px-6 py-4">{course.className}</td>
+                                                 
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    ) : (
+                        <p>No courses applied for withdraw.</p>
+                    )}
                 </div>
-            ) : (
-                <p>No courses applied for withdraw.</p>
-            )}
+            }
         </div>
     );
 };

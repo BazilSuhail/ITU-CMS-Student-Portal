@@ -108,47 +108,37 @@ const ViewMarks = () => {
     });
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <div>
-      <h2>Student Portal</h2>
-      {currentCourses.length > 0 ? (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Course ID</th>
-                <th>Course Name</th>
-                <th>Credit Hours</th>
-                <th>Instructor Name</th>
-                <th>Class Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentCourses.map((course) => (
-                <tr key={course.assignCourseId}>
-                  <td>{course.courseId}</td>
-                  <td>{course.courseName}</td>
-                  <td>{course.creditHours}</td>
-                  <td>{course.instructorName}</td>
-                  <td>{course.className}</td>
-                  <td>
-                    <button onClick={() => handleViewMarks(course)}>View Marks</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {error && <p style={{ color: 'red', marginTop: '20px' }}>Error: {error}</p>}
-        </>
+    <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
+      <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Student's Marks</h2>
+
+      <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : currentCourses.length > 0 ? (
+
+        <div className='grid grid-cols-1 xsx:grid-cols-2 xl:grid-cols-3 p-[10px] my-[12px]'>
+          {currentCourses.map((course) => (
+            <div key={course.assignCourseId} className='bg-custom-blue flex flex-col rounded-lg m-[5px] text-white p-[15px]' >
+              <div className='bg-gray-500 mt-[15px] rounded-lg mx-auto w-[100%] h-[230px]'></div>
+              <p className='text-2xl font-bold my-[8px] ml-[5px]'>{course.courseName}</p>
+              <div className='flex justify-between'>
+              <p className='text-md text-gray-400'>{course.instructorName}</p>
+              <p className='text-md text-gray-400 border-2 border-gray-200 px-[5px] rounded-md'>{course.creditHours}</p>
+              </div>
+              <p className='text-md text-gray-400 font-bold'>{course.className}</p>
+              <button onClick={() => handleViewMarks(course)} className='mx-auto w-[100%] font-bold hover:bg-custom-back-grey my-[8px] bg-blue-700 p-[8px] rounded-xl'>View Marks</button>
+
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No enrolled courses found.</p>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
