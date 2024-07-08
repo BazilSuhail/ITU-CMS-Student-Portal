@@ -43,6 +43,7 @@ const App = () => {
       <Navbar />
       <Suspense fallback={<Loading />}>
         <Routes>
+          
           <Route path="/" element={<Navigate to="/signin" />} />
           <Route path="/signin" element={<SignIn />} />
           

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 import { auth, fs } from '../Config/Config';
 
 const ViewMarks = () => {
@@ -114,9 +115,19 @@ const ViewMarks = () => {
 
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
       {loading ? (
-        <p>Loading...</p>
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : currentCourses.length > 0 ? (
 
         <div className='grid grid-cols-1 xsx:grid-cols-2 xl:grid-cols-3 p-[10px] my-[12px]'>
@@ -125,8 +136,8 @@ const ViewMarks = () => {
               <div className='bg-gray-500 mt-[15px] rounded-lg mx-auto w-[100%] h-[230px]'></div>
               <p className='text-2xl font-bold my-[8px] ml-[5px]'>{course.courseName}</p>
               <div className='flex justify-between'>
-              <p className='text-md text-gray-400'>{course.instructorName}</p>
-              <p className='text-md text-gray-400 border-2 border-gray-200 px-[5px] rounded-md'>{course.creditHours}</p>
+                <p className='text-md text-gray-400'>{course.instructorName}</p>
+                <p className='text-md text-gray-400 border-2 border-gray-200 px-[5px] rounded-md'>{course.creditHours}</p>
               </div>
               <p className='text-md text-gray-400 font-bold'>{course.className}</p>
               <button onClick={() => handleViewMarks(course)} className='mx-auto w-[100%] font-bold hover:bg-custom-back-grey my-[8px] bg-blue-700 p-[8px] rounded-xl'>View Marks</button>
@@ -135,7 +146,7 @@ const ViewMarks = () => {
           ))}
         </div>
       ) : (
-        <p>No enrolled courses found.</p>
+        <p className='text-red-500  mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No enrolled courses found.</p>
       )
       }
     </div >

@@ -93,7 +93,7 @@ const MarksOfSubject = () => {
 
                 </div>
             ) : (
-                <p>No records for {courseName} found.</p>
+                <p className='text-red-500  mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No records for {courseName} found.</p>
             )}
         </div>
     );

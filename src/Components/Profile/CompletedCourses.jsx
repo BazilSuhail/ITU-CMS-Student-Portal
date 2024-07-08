@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fs, auth } from '../../Config/Config';
+import { Circles } from 'react-loader-spinner'
 import CurrentCourses from './CurrentCourses';
+import SemesterGpa from '../SemesterGpa';
+import { IoBarChartOutline } from "react-icons/io5";
 
 const ShowCompletedCourses = () => {
   const [loading, setLoading] = useState(true);
@@ -74,65 +77,90 @@ const ShowCompletedCourses = () => {
 
   return (
     <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
-    <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Academic History</h2>
+      <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Academic History</h2>
 
-    <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+      <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
       <nav className='bg-custom-blue rounded-lg w-[85%] xsx:w-[55%] p-[8px] flex justify-around mt-[10px]  mx-auto text-md xsx:text-xl'>
         <button
           onClick={() => setShowCompletedCourses(true)}
-          className={`rounded-lg hover:border-2 hover:border-white p-[10px] ${showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
+          className={`rounded-lg border-2 border-custom-blue hover:border-white p-[10px] ${showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
           Completed Courses
         </button>
         <button
           onClick={() => setShowCompletedCourses(false)}
-          className={`rounded-lg hover:border-2 hover:border-white p-[10px] ${!showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
+          className={`rounded-lg border-2 border-custom-blue hover:border-white p-[10px] ${!showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
           Current Courses
         </button>
       </nav>
 
-
       {loading ? (
-        <p >Loading...</p>
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-285px)] xsx:h-[calc(100vh-285px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : showCompletedCourses ? (
         <>
 
           <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[12px] gap-x-2 p-[15px] my-[20px]'>
-            <p className='  bg-custom-blue rounded-2xl font-extrabold text-white p-[15px] mx-auto w-[90%]'>
-              <div className=' text-center text-md font-bold'>Total Credit Hours Earned</div>
-              <div className='text-4xl text-center ml-[25px]'>{totalCreditHours}</div>
-            </p>
+            
 
-            <p className='  bg-custom-blue font-extrabold rounded-2xl text-white mx-auto p-[15px] w-[90%]'>
-              <div className='text-center text-blue-200 text-md font-bold'>Total Completed Courses</div>
+            <div className='  bg-custom-blue font-extrabold rounded-2xl text-white mx-auto p-[15px] w-[90%]'>
+              <div className='text-center text-md font-bold'>Total Credit Hours Earned</div>
+              <div className='text-4xl text-center'>{totalCreditHours}</div>
+            </div>
+
+
+            <div className='  bg-custom-blue font-extrabold rounded-2xl text-white mx-auto p-[15px] w-[90%]'>
+              <div className='text-center text-md font-bold'>Total Completed Courses</div>
               <div className='text-4xl text-center'>{completedCourses.length}</div>
-            </p>
+            </div>
 
-            <p className='  bg-custom-blue rounded-2xl font-extrabold text-white mx-auto p-[15px] w-[90%]'>
+            <div className='  bg-custom-blue rounded-2xl font-extrabold text-white mx-auto p-[15px] w-[90%]'>
               <div className=' text-center text-md font-bold'>Cumulative GPA</div>
               <div className='text-4xl  text-center '>{cumulativeGPA}</div>
-            </p>
-
+            </div>
           </div>
+
+          {semesterGPAs.length > 0 ? (
+            <div className='mb-[8px] flex flex-col w-[100%] px-[8px] bg-custom-blue text-white rounded-xl'>
+                  <div className='flex mb-[15px] ml-[15px] items-center rounded-lg text-[22px]'>
+                  <IoBarChartOutline size={29}/>
+                  <h2 className='ml-[7px] font-medium '>Grade Point Averages</h2>
+              </div>
+
+              <SemesterGpa />
+            </div>
+
+          ) : (
+            <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No GPA data found.</p>
+          )}
 
           {completedCourses.length > 0 ? (
             <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-100 rounded-xl overflow-x-auto'>
               <h2 className='text-2xl text-custom-blue mb-[8px] font-bold '>Completed Courses</h2>
-              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead class="text-md text-gray-200 uppercase bg-gray-700">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead className="text-md text-gray-200 uppercase bg-gray-700">
                     <tr className='text-center'>
-                      <th scope="col" class="px-6 py-3">Course Code</th>
-                      <th scope="col" class="px-6 py-3">Course Name</th>
-                      <th scope="col" class="px-6 py-3">Semester</th>
-                      <th scope="col" class="px-6 py-3">Credit Hours</th>
+                      <th scope="col" className="px-6 py-3">Course Code</th>
+                      <th scope="col" className="px-6 py-3">Course Name</th>
+                      <th scope="col" className="px-6 py-3">Semester</th>
+                      <th scope="col" className="px-6 py-3">Credit Hours</th>
                     </tr>
                   </thead>
                   <tbody className='bg-white'>
                     {completedCourses.map((course, index) => (
                       <tr key={course.code} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
-                        <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{course.code}</th>
+                        <th scope="row" className="px-6 py-4 font-bold whitespace-nowrap e">{course.code}</th>
                         <td className="px-6 py-4">{course.name}</td>
                         <td className="px-6 py-4">{course.expectedSemester}</td>
                         <td className="px-6 py-4">{course.creditHours}</td>
@@ -144,31 +172,39 @@ const ShowCompletedCourses = () => {
 
             </div>
           ) : (
-            <p>No completed courses found.</p>
+            <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No completed courses found.</p>
           )}
+
+
 
           <h2 className='mt-[50px]'>Semester GPA</h2>
           {semesterGPAs.length > 0 ? (
             <div>
-              <table className=''>
-                <thead>
-                  <tr>
-                    <th>Semester</th>
-                    <th>GPA</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {semesterGPAs.map((result, index) => (
-                    <tr key={index}>
-                      <td>{result.semester}</td>
-                      <td>{result.gpa}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {
+
+                /*
+                
+                <table className=''>
+            <thead>
+              <tr>
+                <th>Semester</th>
+                <th>GPA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {semesterGPAs.map((result, index) => (
+                <tr key={index}>
+                  <td>{result.semester}</td>
+                  <td>{result.gpa}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+                */
+              }
             </div>
           ) : (
-            <p>No GPA data found.</p>
+            <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No GPA data found.</p>
           )}
         </>
       ) : (

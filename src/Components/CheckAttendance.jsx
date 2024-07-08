@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, fs } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner'
 
 const CheckAttendance = () => {
   const navigate = useNavigate();
@@ -76,9 +77,19 @@ const CheckAttendance = () => {
 
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
       {loading ? (
-        <p>Loading...</p>
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : (
         <div>
           {currentUser && (
@@ -114,7 +125,7 @@ const CheckAttendance = () => {
                   </div>
                 </div>
               ) : (
-                <p>No enrolled courses found.</p>
+                <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No enrolled courses found.</p>
               )}
             </div>
           )}

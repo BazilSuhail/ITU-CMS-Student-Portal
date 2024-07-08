@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth, fs } from '../Config/Config';
+import { Circles } from 'react-loader-spinner';
 
 const EnrolledCourses = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -91,20 +92,28 @@ const EnrolledCourses = () => {
   const filteredCourses = courses.filter(course => !completedCourses.includes(course.courseName));
 
   return (
-
-
     <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
       <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Available Courses</h2>
 
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
       {loading ? (
-        <p>Loading...</p>
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : (
         <div>
           {currentUser && (
-            <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-100 rounded-xl overflow-x-auto'> 
+            <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-100 rounded-xl overflow-x-auto'>
               <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <thead class="text-md text-gray-200 uppercase bg-gray-700">
@@ -122,11 +131,11 @@ const EnrolledCourses = () => {
                         <td className="whitespace-nowrap text-center font-bold px-6 py-4"><p className='bg-blue-950 rounded-lg text-white p-[8px]'>{course.className}</p></td>
                         <td className="whitespace-nowrap text-lg text-center font-bold  px-6 py-4">{course.instructorName}</td>
 
-                        <td className="whitespace-nowrap text-center font-bold  px-6 py-4"> 
+                        <td className="whitespace-nowrap text-center font-bold  px-6 py-4">
                           {enrolledCourses.includes(course.id) ? (
-                            <button disabled  className="whitespace-nowrap bg-gray-500 text-md py-[8px] px-[12px] font-semibold text-white rounded-xl">Enrolled</button>
+                            <button disabled className="whitespace-nowrap bg-gray-500 text-md py-[8px] px-[12px] font-semibold text-white rounded-xl">Enrolled</button>
                           ) : (
-                            <button onClick={() => handleEnroll(course.id) }  className="whitespace-nowrap bg-custom-blue hover:bg-white hover:border-2 hover:text-custom-blue text-md py-[8px] px-[25px] font-semibold text-white rounded-xl">Enroll</button>
+                            <button onClick={() => handleEnroll(course.id)} className="whitespace-nowrap bg-custom-blue hover:bg-white border-2 hover:text-custom-blue text-md py-[8px] px-[25px] font-semibold text-white rounded-xl">Enroll</button>
                           )}
                         </td>
                       </tr>

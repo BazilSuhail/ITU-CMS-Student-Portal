@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { auth, fs } from '../Config/Config';
+import { Circles } from 'react-loader-spinner';
 
 const StudentAttendanceDetails = () => {
   const { assignCourseId } = useParams();
@@ -71,42 +72,52 @@ const StudentAttendanceDetails = () => {
       <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Attendance Record</h2>
 
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
-      {loading ? (
-        <p>Loading...</p>
+     {loading ? (
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-195px)] xsx:h-[calc(100vh-85px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : (
         currentUser && (
           <div>
             {attendanceRecords.length > 0 ? (
               <>
-                <div className='gri grid-cols-1 xsx:grid-cols-4  p-[15px] my-[20px]'>
+                <div className='grid grid-cols-1 xsx:grid-cols-4 p-[15px] my-[20px]'>
 
 
-                  <p className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px] font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px] font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Total Days</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
                     <div className='text-4xl text-center mx-auto'>{totalDays}</div>
-                  </p>
+                  </div>
 
-                  <p className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Days Present</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
                     <div className='text-4xl text-green-500 text-center mx-auto'>{daysPresent}</div>
-                  </p>
+                  </div>
 
 
-                  <p className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Days Absent</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
                     <div className='text-4xl text-red-600 text-center mx-auto'>{totalDays - daysPresent}</div>
-                  </p>
+                  </div>
 
-                  <p className='bg-custom-blue text-white  mx-auto mb-[30px] rounded-2xl font-extrabold p-[15px] w-[90%]'>
+                  <div className='bg-custom-blue text-white  mx-auto mb-[30px] rounded-2xl font-extrabold p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Attendance %</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-white'></div>
                     <div className='text-3xl text-center mx-auto'>{attendancePercentage}%</div>
-                  </p>
+                  </div>
                 </div>
 
 
@@ -144,7 +155,7 @@ const StudentAttendanceDetails = () => {
               </>
 
             ) : (
-              <p>No attendance records found.</p>
+              <p className='text-red-500  mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No attendance records found.</p>
             )}
           </div>
         )

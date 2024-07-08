@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
+import { Circles } from 'react-loader-spinner'
 
 const CurrentCourses = ({ currentCoursesIds }) => {
   const [currentCoursesData, setCurrentCoursesData] = useState([]);
@@ -44,15 +45,25 @@ const CurrentCourses = ({ currentCoursesIds }) => {
   }, [currentCoursesIds]);
 
   if (loading) {
-    return <p>Loading current courses...</p>;
+    return <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+      <Circles
+        height="60"
+        width="60"
+        color="rgb(0, 63, 146)"
+        ariaLabel="circles-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>;
   }
 
   return (
-    <> 
+    <>
       {currentCoursesData.length > 0 ? (
 
         <div className='my-[8px] flex flex-col w-[100%] p-[15px] justify-center bg-gray-100 rounded-xl overflow-x-auto'>
@@ -81,7 +92,7 @@ const CurrentCourses = ({ currentCoursesIds }) => {
         </div>
 
       ) : (
-        <p>No current courses found.</p>
+        <p className='text-red-500 mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No current courses found.</p>
       )}
     </>
   );

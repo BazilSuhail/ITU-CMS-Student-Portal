@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { auth, fs } from '../../Config/Config';
 import CurrentCourses from './CurrentCourses';
+import { Circles } from 'react-loader-spinner';
+
+/*
+{loading ? (
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+
+
+
+*/
 
 const StudentProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -53,43 +72,55 @@ const StudentProfile = () => {
     <div className='xsx:ml-[285px] ml-[10px] mr-[12px] flex flex-col'>
       <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Student Profile</h2>
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+
       {loading ? (
-        <p>Loading...</p>
+        <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-195px)] xsx:h-[calc(100vh-85px)] w-screen flex flex-col justify-center items-center'>
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(0, 63, 146)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+
       ) : error ? (
-        <p className='home'>Error: {error}</p>
+        <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>Error: {error}</p>
       ) : userData ? (
         <div>
           <p className='bg-blue-950 rounded-xl text-xl xsx:text-3xl mb-[-25px] xsx:mb-[0px] text-white p-[7px]'>Academic Information:</p>
 
           <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[8px] p-[15px] my-[20px]'>
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Roll Number:</div>
               <div className='text-3xl xsx:text-4xl '>{userData.rollNumber}</div>
-            </p>
+            </div>
 
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Email:</div>
               <div className='text-3xl xsx:text-4xl '>{userData.email}</div>
-            </p>
+            </div>
 
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Batch:</div>
               <div className='text-3xl xsx:text-4xl '>{userData.batch}</div>
-            </p>
+            </div>
 
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Semester:</div>
               <div className='text-3xl xsx:text-4xl '>{userData.semester}</div>
-            </p>
+            </div>
 
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Degree Program:</div>
               <div className='text-2xl xsx:text-4xl '>{userData.degreeProgram}</div>
-            </p>
-            <p className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
+            </div>
+            <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Class:</div>
               <div className='text-3xl xsx:text-4xl '>{className}</div>
-            </p>
+            </div>
           </div>
 
 
@@ -97,36 +128,36 @@ const StudentProfile = () => {
 
           <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[8px] p-[15px] my-[20px]'>
 
-            <p className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[5px] text-md'>Name:</div>
               <div className='text-3xl'>{userData.name}</div>
-            </p>
+            </div>
 
-            <p className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[5px] text-md'>Father's Name:</div>
               <div className='text-3xl'>{userData.fatherName}</div>
-            </p>
+            </div>
 
-            <p className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[5px] text-md'>Gender:</div>
               <div className='text-3xl'>{userData.gender}</div>
-            </p>
+            </div>
 
-            <pz className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[5px] text-md'>City:</div>
               <div className='text-3xl'>{userData.city}</div>
-            </pz>
+            </div>
 
-            <p className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark   rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[5px] text-md'>Country:</div>
               <div className='text-3xl'>{userData.country}</div>
-            </p>
+            </div>
 
 
-            <p className='shadow-custom-dark  rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
+            <div className='shadow-custom-dark  rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%]'>
               <div className='ml-[15px] text-md'>Nationality:</div>
               <div className='text-3xl'>{userData.nationality}</div>
-            </p>
+            </div>
 
           </div>
 
@@ -137,8 +168,9 @@ const StudentProfile = () => {
         </div>
       ) : (
         <p>No user data available</p>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

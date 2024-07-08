@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { auth, fs } from '../Config/Config';
-
-import logo from "./itu.png"
+import logo from "./itu.png";
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
@@ -34,40 +33,63 @@ const SignIn = () => {
     }
   };
 
+  const [emailClicked, setEmailClicked] = useState(false);
+  const [passwordClicked, setPasswordClicked] = useState(false);
+
   return (
     <div className='fixed text-white bg-custom-blue w-screen h-screen z-50'>
       <img src={logo} alt="" className='mx-auto xsx:w-[200px] xsx:mt-[45px] mt-[65px] w-[150px] h-[150px] xsx:h-[200px] rounded-[50%] my-[20px]' />
       <div className='border rounded-xl border-white w-[95vw] md:w-[600px] font-extrabold mx-auto p-[12px] md:p-[20px] flex flex-col items-center'>
-
         <h2 className='text-3xl'>Sign In</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSignIn} className='flex flex-col w-[95%]'>
 
-          <div className='text-lg text-blue-200 mb-[5px] font-normal'>Email:</div>
-          <input
-            type="email"
-            id="email"
-            placeholder='Enter Assigned Email....'
-            value={email}
-            className='rounded-lg bg-custom-blue border placeholder:font-thin font-normal text-lg text-white p-[8px] border-white'
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className='relative my-6'>
+            <label
+              className={`absolute left-3 top-[15px] bg-custom-blue text-white transition-transform duration-300 transform ${
+                emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+              }`}
+              htmlFor="email"
+              onClick={() => setEmailClicked(true)}
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email" 
+              value={email}
+              className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
+              onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setEmailClicked(true)}
+              onBlur={(e) => setEmailClicked(e.target.value !== '')}
+              required
+            />
+          </div>
 
-          <div className='text-lg text-blue-200 mb-[5px] mt-[15px] font-normal'>Password:</div>
-          <input
-            type="password"
-            id="password"
+          <div className='relative mb-6'>
+            <label
+              className={`absolute left-3 top-[15px] bg-custom-blue text-white transition-transform duration-300 transform ${
+                passwordClicked || password ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+              }`}
+              htmlFor="password"
+              onClick={() => setPasswordClicked(true)}
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password" 
+              value={password}
+              className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setPasswordClicked(true)}
+              onBlur={(e) => setPasswordClicked(e.target.value !== '')}
+              required
+            />
+          </div>
 
-            placeholder='Enter Password'
-            className='rounded-lg bg-custom-blue border placeholder:font-thin text-lg text-white p-[8px] border-white'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <button type="submit" className='bg-blue-600 w-[100%] font-medium p-[8px] text-2xl rounded-2xl my-[35px]' disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+          <button type="submit" className='bg-blue-600 w-full font-medium p-[8px] text-2xl rounded-2xl mb-[35px]' disabled={loading}>
+            Sign In
           </button>
         </form>
       </div>
