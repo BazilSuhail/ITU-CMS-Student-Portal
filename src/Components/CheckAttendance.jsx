@@ -114,7 +114,7 @@ const CheckAttendance = () => {
                             <td className="whitespace-nowrap text-center px-6 py-4">{course.className}</td>
                             <td className="whitespace-nowrap text-center  px-6 py-4">{course.instructorName}</td>
                             <td className="whitespace-nowrap text-center  px-6 py-4">
-                              <button onClick={() => handleViewAttendance(course.assignCourseId)} className="whitespace-nowrap bg-custom-blue hover:bg-white hover:border-2 hover:text-custom-blue text-md py-[8px] px-[12px] font-semibold text-white rounded-xl" >
+                              <button onClick={() => handleViewAttendance(course.assignCourseId)} className="whitespace-nowrap bg-custom-blue hover:bg-white border-2 hover:text-custom-blue text-md py-[8px] px-[12px] font-semibold text-white rounded-xl" >
                                 View Attendance
                               </button>
                             </td>

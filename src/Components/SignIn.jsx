@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth, fs } from '../Config/Config';
 import logo from "./itu.png";
 import { useNavigate } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -38,6 +39,21 @@ const SignIn = () => {
 
   return (
     <div className='fixed text-white bg-custom-blue w-screen h-screen z-50'>
+
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-70 backdrop-blur-[6px] flex items-center justify-center z-50">
+          <Circles
+            height="60"
+            width="60"
+            color="rgb(143, 186, 255)"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      )}
+
       <img src={logo} alt="" className='mx-auto xsx:w-[200px] xsx:mt-[45px] mt-[65px] w-[150px] h-[150px] xsx:h-[200px] rounded-[50%] my-[20px]' />
       <div className='border rounded-xl border-white w-[95vw] md:w-[600px] font-extrabold mx-auto p-[12px] md:p-[20px] flex flex-col items-center'>
         <h2 className='text-3xl'>Sign In</h2>
@@ -46,9 +62,8 @@ const SignIn = () => {
 
           <div className='relative my-6'>
             <label
-              className={`absolute left-3 top-[15px] bg-custom-blue text-white transition-transform duration-300 transform ${
-                emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
-              }`}
+              className={`absolute left-3 top-[15px] bg-custom-blue text-white font-medium transition-transform duration-300 transform ${emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+                }`}
               htmlFor="email"
               onClick={() => setEmailClicked(true)}
             >
@@ -56,7 +71,7 @@ const SignIn = () => {
             </label>
             <input
               type="email"
-              id="email" 
+              id="email"
               value={email}
               className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setEmail(e.target.value)}
@@ -68,9 +83,8 @@ const SignIn = () => {
 
           <div className='relative mb-6'>
             <label
-              className={`absolute left-3 top-[15px] bg-custom-blue text-white transition-transform duration-300 transform ${
-                passwordClicked || password ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
-              }`}
+              className={`absolute left-3 top-[15px] bg-custom-blue text-white  font-medium transition-transform duration-300 transform ${passwordClicked || password ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+                }`}
               htmlFor="password"
               onClick={() => setPasswordClicked(true)}
             >
@@ -78,7 +92,7 @@ const SignIn = () => {
             </label>
             <input
               type="password"
-              id="password" 
+              id="password"
               value={password}
               className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setPassword(e.target.value)}

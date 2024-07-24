@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fs, auth } from '../../Config/Config';
-import { Circles } from 'react-loader-spinner'
+import { Circles } from 'react-loader-spinner';
 import CurrentCourses from './CurrentCourses';
 import SemesterGpa from '../SemesterGpa';
 import { IoBarChartOutline } from "react-icons/io5";

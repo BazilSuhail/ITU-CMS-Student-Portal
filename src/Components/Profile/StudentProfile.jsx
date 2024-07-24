@@ -77,17 +77,17 @@ const StudentProfile = () => {
           <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[8px] p-[15px] my-[20px]'>
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Roll Number:</div>
-              <div className='text-3xl xsx:text-4xl '>{userData.rollNumber}</div>
+              <div className='text-3xl xsx:text-3xl '>{userData.rollNumber}</div>
             </div>
 
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
-              <div className='ml-[5px] text-md'>Email:</div>
-              <div className='text-3xl xsx:text-4xl '>{userData.email}</div>
+              <div className='ml-[5px]  text-md'>Email:</div>
+              <div className='text-3xl lg:text-[24px]  xl:text-[28px]'>{userData.email}</div>
             </div>
 
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Batch:</div>
-              <div className='text-3xl xsx:text-4xl '>{userData.batch}</div>
+              <div className='text-3xl xsx:text-3xl '>{userData.batch}</div>
             </div>
 
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
@@ -97,11 +97,11 @@ const StudentProfile = () => {
 
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Degree Program:</div>
-              <div className='text-2xl xsx:text-4xl '>{userData.degreeProgram}</div>
+              <div className='text-2xl xsx:text-3xl '>{userData.degreeProgram}</div>
             </div>
             <div className='bg-custom-blue rounded-2xl text-white p-[15px] w-full xsx:w-[90%] transform hover:scale-110 transition-transform duration-300'>
               <div className='ml-[5px] text-md'>Class:</div>
-              <div className='text-3xl xsx:text-4xl '>{className}</div>
+              <div className='text-3xl xsx:text-3xl '>{className}</div>
             </div>
           </div>
 
