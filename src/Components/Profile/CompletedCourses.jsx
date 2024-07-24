@@ -174,38 +174,6 @@ const ShowCompletedCourses = () => {
           ) : (
             <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No completed courses found.</p>
           )}
-
-
-
-          <h2 className='mt-[50px]'>Semester GPA</h2>
-          {semesterGPAs.length > 0 ? (
-            <div>
-              {
-
-                /*
-                
-                <table className=''>
-            <thead>
-              <tr>
-                <th>Semester</th>
-                <th>GPA</th>
-              </tr>
-            </thead>
-            <tbody>
-              {semesterGPAs.map((result, index) => (
-                <tr key={index}>
-                  <td>{result.semester}</td>
-                  <td>{result.gpa}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-                */
-              }
-            </div>
-          ) : (
-            <p className='text-red-500 p-[15px] border-2 border-red-600 rounded-xl'>No GPA data found.</p>
-          )}
         </>
       ) : (
         <CurrentCourses currentCoursesIds={userData.currentCourses || []} />

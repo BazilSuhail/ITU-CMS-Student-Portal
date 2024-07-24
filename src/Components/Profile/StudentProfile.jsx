@@ -3,24 +3,6 @@ import { auth, fs } from '../../Config/Config';
 import CurrentCourses from './CurrentCourses';
 import { Circles } from 'react-loader-spinner';
 
-/*
-{loading ? (
-        <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
-          <Circles
-            height="60"
-            width="60"
-            color="rgb(0, 63, 146)"
-            ariaLabel="circles-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        </div>
-
-
-
-*/
-
 const StudentProfile = () => {
   const [userData, setUserData] = useState(null);
   const [className, setClassName] = useState(null);
