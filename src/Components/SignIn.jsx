@@ -55,9 +55,13 @@ const SignIn = () => {
       )}
 
       <img src={logo} alt="" className='mx-auto xsx:w-[200px] xsx:mt-[45px] mt-[65px] w-[150px] h-[150px] xsx:h-[200px] rounded-[50%] my-[20px]' />
-      <div className='border rounded-xl border-white w-[95vw] md:w-[600px] font-extrabold mx-auto p-[12px] md:p-[20px] flex flex-col items-center'>
-        <h2 className='text-3xl'>Sign In</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div className=' w-[100vw] md:w-[600px] mx-auto p-[8px] md:p-[20px] flex flex-col items-center'>
+
+        <h2 className='text-3xl font-bold xsx:mt-[-20px] mb-[25px]'>Student Portal</h2>
+        <div className='h-[3px] w-[95%] mx-auto mb-[25px] bg-blue-50'></div>
+        {error && <p className='text-red-500 font-medium '>{error}</p>}
+
+        <h4 className='text-lg text-blue-50 self-start flex items-center xsx:pl-[12px] pl-[8px] font-medium'>Login with <p className='pl-[8px] underline text-blue-500'>Provided Credentials</p></h4>
         <form onSubmit={handleSignIn} className='flex flex-col w-[95%]'>
 
           <div className='relative my-6'>
