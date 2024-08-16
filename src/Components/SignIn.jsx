@@ -38,7 +38,7 @@ const SignIn = () => {
   const [passwordClicked, setPasswordClicked] = useState(false);
 
   return (
-    <div className='fixed text-white bg-custom-blue w-screen h-screen z-50'>
+    <div className='fixed text-white bg-gradient-to-br from-custom-blue via-black  to-custom-blue w-screen h-screen z-50'>
 
       {loading && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-70 backdrop-blur-[6px] flex items-center justify-center z-50">
@@ -55,8 +55,8 @@ const SignIn = () => {
       )}
 
       <img src={logo} alt="" className='mx-auto xsx:w-[200px] xsx:mt-[45px] mt-[65px] w-[150px] h-[150px] xsx:h-[200px] rounded-[50%] my-[20px]' />
-      <div className=' w-[100vw] md:w-[600px] mx-auto p-[8px] md:p-[20px] flex flex-col items-center'>
-
+      
+      <div className=' w-[100vw] md:w-[600px] xl:w-[560px] mx-auto p-[8px] md:p-[20px] flex flex-col items-center'>
         <h2 className='text-3xl font-bold xsx:mt-[-20px] mb-[25px]'>Student Portal</h2>
         <div className='h-[3px] w-[95%] mx-auto mb-[25px] bg-blue-50'></div>
         {error && <p className='text-red-500 font-medium '>{error}</p>}
@@ -105,10 +105,8 @@ const SignIn = () => {
               required
             />
           </div>
+          <button type="submit" disabled={loading} className="relative inline-flex items-center border-2 border-blue-900  justify-start px-5 py-2 overflow-hidden font-medium transition-all bg-blue-900 rounded-full hover:bg-white group"> <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span> <span className="relative text-center w-full text-2xl text-white transition-colors duration-200 ease-in-out font-bold group-hover:text-blue-800">Sign In</span> </button>
 
-          <button type="submit" className='bg-blue-600 w-full font-medium p-[8px] text-2xl rounded-2xl mb-[35px]' disabled={loading}>
-            Sign In
-          </button>
         </form>
       </div>
     </div>

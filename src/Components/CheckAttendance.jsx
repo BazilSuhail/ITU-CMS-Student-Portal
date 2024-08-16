@@ -111,8 +111,8 @@ const CheckAttendance = () => {
                         {enrolledCourses.map((course) => (
                           <tr key={course.assignCourseId} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
                             <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{course.courseName}</th>
-                            <td className="whitespace-nowrap text-center px-6 py-4">{course.className}</td>
-                            <td className="whitespace-nowrap text-center  px-6 py-4">{course.instructorName}</td>
+                            <td className="whitespace-nowrap  font-medium text-center px-6 py-4">{course.className}</td>
+                            <td className="whitespace-nowrap  font-medium  text-center  px-6 py-4">{course.instructorName}</td>
                             <td className="whitespace-nowrap text-center  px-6 py-4">
                               <button onClick={() => handleViewAttendance(course.assignCourseId)} className="whitespace-nowrap bg-custom-blue hover:bg-white border-2 hover:text-custom-blue text-md py-[8px] px-[12px] font-semibold text-white rounded-xl" >
                                 View Attendance

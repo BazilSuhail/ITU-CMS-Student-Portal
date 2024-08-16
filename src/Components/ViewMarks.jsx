@@ -3,11 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 import { auth, fs } from '../Config/Config';
 
+import img1 from "../Assets/img1.jpg";
+import img2 from "../Assets/img2.jpg";
+import img3 from "../Assets/img3.jpg";
+import img4 from "../Assets/img4.jpg";
+import img5 from "../Assets/img5.jpg";
+
 const ViewMarks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentCourses, setCurrentCourses] = useState([]);
   const navigate = useNavigate();
+
+  const images = [img1, img2, img3, img4, img5]; // Array of imported images
 
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
@@ -131,19 +139,23 @@ const ViewMarks = () => {
       ) : currentCourses.length > 0 ? (
 
         <div className='grid grid-cols-1 xsx:grid-cols-2 xl:grid-cols-3 p-[10px] my-[12px]'>
-          {currentCourses.map((course) => (
-            <div key={course.assignCourseId} className='bg-custom-blue flex flex-col rounded-lg m-[5px] text-white p-[15px]' >
-              <div className='bg-gray-500 mt-[15px] rounded-lg mx-auto w-[100%] h-[230px]'></div>
-              <p className='text-2xl font-bold my-[8px] ml-[5px]'>{course.courseName}</p>
-              <div className='flex justify-between'>
-                <p className='text-md text-gray-400'>{course.instructorName}</p>
-                <p className='text-md text-gray-400 border-2 border-gray-200 px-[5px] rounded-md'>{course.creditHours}</p>
+          {currentCourses.map((course, index) => {
+            const imageIndex = index % images.length; // Calculate the image index based on the course index
+            return (
+              <div key={course.assignCourseId} className='bg-custom-blue  flex flex-col rounded-lg m-[5px] text-white p-[15px]'>
+                <div className='bg-gray-500 mt-[15px] border-2 border-blue-900 rounded-xl overflow-hidden mx-auto w-[100%] h-[230px]'>
+                  <img src={images[imageIndex]} alt="Counldn't Fecth Details | Network Error - :/" className='w-full h-full object-cover' />
+                </div>
+                <p className='text-2xl font-bold my-[8px] ml-[5px]'>{course.courseName}</p>
+                <div className='flex justify-between'>
+                  <p className='text-md text-gray-400'>{course.instructorName}</p>
+                  <p className='text-md text-gray-400 border-2 border-gray-200 px-[5px] rounded-md'>{course.creditHours}</p>
+                </div>
+                <p className='text-md text-gray-400 font-bold'>{course.className}</p>
+                <button onClick={() => handleViewMarks(course)} className='mx-auto w-[100%] font-bold hover:bg-custom-back-grey my-[8px] bg-blue-700 p-[8px] rounded-xl'>View Marks</button>
               </div>
-              <p className='text-md text-gray-400 font-bold'>{course.className}</p>
-              <button onClick={() => handleViewMarks(course)} className='mx-auto w-[100%] font-bold hover:bg-custom-back-grey my-[8px] bg-blue-700 p-[8px] rounded-xl'>View Marks</button>
-
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <p className='text-red-500  mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No enrolled courses found.</p>

@@ -23,33 +23,8 @@ const MarksOfSubject = () => {
             <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
             {selectedCourseMarks ? (
                 <div>
-                    <div className='bg-custom-blue  w-[265px] my-[25px] text-white border- text-2xl text-center font-serif p-[8px] rounded-2xl'>Grading Criteria</div>
-
-                    <div class="relative  w-[100%] xl:w-[48%] mt-[25px] overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-[100%] text-sm text-gray-400 dark:text-gray-400">
-                            <thead class="text-lg text-gray-200 bg-gray-900">
-                                <tr className='text-center'>
-                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Sr.No</th>
-                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Assessment Name</th>
-                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Weightage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
-                                    <tr key={index} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue text-lg'>
-                                        <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{index}</th>
-                                        <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{criterion.assessment}</th>
-                                        <td className="whitespace-nowrap text-center">
-                                            <p className=' bg-gray-700 text-white mx-auto  p-[6px] rounded-2xl'>{criterion.weightage}%</p>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div className='shadow-custom-light w-[265px] my-[32px] text-custom-blue border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Obtained Marks</div>
-                    <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+                    <div className=' w-[215px]  mt-[32px] text-custom-blue text-2xl text-center font-bold'>Obtained Marks</div>
+                    <div className='w-[95%] my-[15px] mx-auto h-[2px] bg-custom-blue'></div>
 
                     <div class="relative w-[98%] mx-auto overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-[100%] text-sm text-gray-500 dark:text-gray-400">
@@ -90,7 +65,32 @@ const MarksOfSubject = () => {
                         <div className='h-[20px]'></div>
                     </div>
 
+                    
+                    <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+                    <div className=' w-[215px] font-serif mt-[22px] text-custom-blue text-2xl text-center font-bold'>Grading Criteria</div>
 
+                    <div class="relative  w-[100%] mt-[10px] overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-[100%] text-sm text-gray-400 dark:text-gray-400">
+                            <thead class="text-lg text-gray-200 bg-gray-900">
+                                <tr className='text-center'>
+                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Sr.No</th>
+                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Assessment Name</th>
+                                    <th scope="col" class="whitespace-nowrap px-6 py-3">Weightage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {selectedCourseMarks.criteriaDefined.map((criterion, index) => (
+                                    <tr key={index} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue text-lg'>
+                                        <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{index}</th>
+                                        <th scope="row" class="px-6 py-4 font-bold whitespace-nowrap e">{criterion.assessment}</th>
+                                        <td className="whitespace-nowrap text-center">
+                                            <p className=' text-gray-700 font-extrabold mx-auto  p-[6px] rounded-2xl'>{criterion.weightage}%</p>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             ) : (
                 <p className='text-red-500  mt-[15px] p-[15px] border-2 border-red-600 rounded-xl'>No records for {courseName} found.</p>
