@@ -91,29 +91,27 @@ const StudentAttendanceDetails = () => {
           <div>
             {attendanceRecords.length > 0 ? (
               <>
-                <div className='grid grid-cols-1 xsx:grid-cols-4 p-[15px] my-[20px]'>
-
-
-                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px] font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                <div className='grid grid-cols-1 xsx:grid-cols-4 gap-y-6  bg-gray-200 rounded-lg py-[25px] px-[15px] my-[20px] '>
+                  <div className='bg-white rounded-2xl mx-auto font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Total Days</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
                     <div className='text-4xl text-center mx-auto'>{totalDays}</div>
                   </div>
 
-                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                  <div className='bg-white rounded-2xl mx-auto  font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Days Present</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
-                    <div className='text-4xl text-green-500 text-center mx-auto'>{daysPresent}</div>
+                    <div className='text-4xl text-green-700 text-center mx-auto'>{daysPresent}</div>
                   </div>
 
 
-                  <div className=' shadow-custom-light  rounded-2xl mx-auto mb-[30px]  font-extrabold text-custom-blue p-[15px] w-[90%]'>
+                  <div className='bg-white rounded-2xl mx-auto  font-extrabold text-custom-blue p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Days Absent</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-custom-blue'></div>
                     <div className='text-4xl text-red-600 text-center mx-auto'>{totalDays - daysPresent}</div>
                   </div>
 
-                  <div className='bg-custom-blue text-white  mx-auto mb-[30px] rounded-2xl font-extrabold p-[15px] w-[90%]'>
+                  <div className='bg-custom-blue text-white  mx-auto rounded-2xl font-extrabold p-[15px] w-[90%]'>
                     <div className=' text-center text-2xl font-bold'>Attendance %</div>
                     <div className='w-[75%] my-[7px] mx-auto h-[4px] bg-white'></div>
                     <div className='text-3xl text-center mx-auto'>{attendancePercentage}%</div>
@@ -121,11 +119,11 @@ const StudentAttendanceDetails = () => {
                 </div>
 
 
-                <div className='my-[8px] flex flex-col w-[100%] p-[35px] justify-center bg-gray-200 rounded-xl overflow-x-auto'>
+                <div className='my-[8px] flex flex-col w-[100%] px-[15px] md:px-[25px] py-[35px] justify-center bg-gray-200 rounded-xl overflow-x-auto'>
 
                   <h2 className='text-2xl text-custom-blue mb-[8px] font-bold '>Complete Attendance</h2>
 
-                  <div class="relative  overflow-x-auto shadow-md sm:rounded-lg">
+                  <div class="relative overflow-x-auto shadow-md rounded-lg">
                     <table class="w-[100%] text-sm text-gray-500 dark:text-gray-400">
                       <thead class="text-md text-gray-200 uppercase bg-gray-700">
                         <tr className='text-center'>
@@ -136,14 +134,12 @@ const StudentAttendanceDetails = () => {
                       <tbody className='bg-white'>
                         {attendanceRecords.map((record, index) => (
                           <tr key={index} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue  border-b'>
-                            <th scope="row" class="px-6 text-xl py-4 font-bold whitespace-nowrap e">{record.date}</th>
+                            <th scope="row" class="px-6 text-[18px] sm:text-xl py-2 font-bold whitespace-nowrap e">{record.date}</th>
                             <td className='px-6 py-4'>
-                              <div className={`whitespace-nowrap text-lg p-[5px] mx-auto font-bold text-white rounded-3xl w-[85px] xsx:w-[50%] ${record.records[currentUser.uid] ? 'bg-green-500' : 'bg-red-500'}`}>
+                              <div className={`whitespace-nowrap text-lg p-[5px] mx-auto font-bold text-white rounded-3xl w-[85px] xsx:w-[50%] ${record.records[currentUser.uid] ? 'bg-green-700' : 'bg-red-500'}`}>
                                 {record.records[currentUser.uid] ? 'Present' : 'Absent'}
                               </div>
                             </td>
-
-
                           </tr>
                         ))}
                       </tbody>
