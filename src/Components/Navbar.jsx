@@ -11,7 +11,7 @@ import { ImCross } from "react-icons/im";
 import { RiMenu3Line } from "react-icons/ri";
 
 import logo from "./itu.png";
-import profile from "./Profile1.png";
+import profile from "../Assets/Profile1.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ const Navbar = () => {
       {/* Navbar for larger screens */}
       <div className="mt-[6px] fixed hidden xsx:flex xsx:flex-col xsx:justify-between shadow-xl rounded-2xl m-[10px] xsx:items-center w-[260px] h-[98vh] bg-custom-blue p-[10px]">
         <div className="mt-[8px] w-[100%] flex">
-          <img src={profile} alt="" className="ml-[25px] w-[70px] h-[70px] " />
+          <img src={profile} alt="" className="ml-[25px] border-[3px] border-custom-back-grey rounded-full w-[70px] h-[70px] " />
           <div className="ml-[20px]">
             <div className="text-white ml-[0px] mt-[10px] text-md text-center">Welcome,</div>
             {loading ? (

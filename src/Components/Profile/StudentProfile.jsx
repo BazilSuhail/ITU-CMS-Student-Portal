@@ -183,8 +183,8 @@ const StudentProfile = () => {
           </div>
 
 
-          <div className=' py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg bg-blue-950 rounded-lg text-white flex w-[100%] items-center'>Current Address: <div className='ml-[8px] mb-[4px] text-md xsx:text-2xl px-[20px] font-sans   '>{userData.currentAddress}</div></div>
-          <div className='py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg bg-blue-950 rounded-lg text-white flex w-[100%] items-center'>Permanent Address: <div className='ml-[8px] mb-[4px] text-md xsx:text-2xl  px-[20px] font-sans '>{userData.permanentAddress}</div></div>
+          <div className=' py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Current Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg px-[20px]  font-normal  '>{userData.currentAddress}</div></div>
+          <div className='py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Permanent Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg  px-[20px] font-normal '>{userData.permanentAddress}</div></div>
 
           <CurrentCourses currentCoursesIds={userData.currentCourses || []} />
         </div>

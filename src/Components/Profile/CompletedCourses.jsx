@@ -126,7 +126,7 @@ const ShowCompletedCourses = () => {
 
             <div className='  bg-custom-blue rounded-2xl font-extrabold text-white mx-auto p-[15px] w-[90%]'>
               <div className=' text-center text-md font-bold'>Cumulative GPA</div>
-              <div className='text-4xl  text-center '>{cumulativeGPA}</div>
+              <div className='text-4xl  text-center '>{cumulativeGPA.toFixed(2)}</div>
             </div>
           </div>
 
