@@ -77,7 +77,7 @@ const SignIn = () => {
               type="email"
               id="email"
               value={email}
-              className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
+              className="rounded-lg bg-custom-blue border font-normal text-[22px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setEmail(e.target.value)}
               onFocus={() => setEmailClicked(true)}
               onBlur={(e) => setEmailClicked(e.target.value !== '')}
@@ -98,7 +98,7 @@ const SignIn = () => {
               type="password"
               id="password"
               value={password}
-              className="rounded-lg bg-custom-blue border font-normal text-[25px] text-white p-[8px] border-white w-full focus:outline-none"
+              className="rounded-lg bg-custom-blue border font-normal text-[22px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setPassword(e.target.value)}
               onFocus={() => setPasswordClicked(true)}
               onBlur={(e) => setPasswordClicked(e.target.value !== '')}
