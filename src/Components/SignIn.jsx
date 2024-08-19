@@ -64,7 +64,7 @@ const SignIn = () => {
         <h4 className='text-lg text-blue-50 self-start flex items-center xsx:pl-[12px] pl-[8px] font-medium'>Login with <p className='pl-[8px] underline text-blue-500'>Provided Credentials</p></h4>
         <form onSubmit={handleSignIn} className='flex flex-col w-[95%]'>
 
-          <div className='relative my-6'>
+          <div className='relative mt-8 mb-9'>
             <label
               className={`absolute left-3 top-[12px] bg-custom-blue text-white font-medium transition-transform duration-300 transform ${emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
                 }`}
