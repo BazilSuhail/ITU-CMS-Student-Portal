@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('bscs22072@gmail.com');
+  const [password, setPassword] = useState('112233');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const SignIn = () => {
 
           <div className='relative my-6'>
             <label
-              className={`absolute left-3 top-[15px] bg-custom-blue text-white font-medium transition-transform duration-300 transform ${emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+              className={`absolute left-3 top-[12px] bg-custom-blue text-white font-medium transition-transform duration-300 transform ${emailClicked || email ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
                 }`}
               htmlFor="email"
               onClick={() => setEmailClicked(true)}
@@ -77,7 +77,7 @@ const SignIn = () => {
               type="email"
               id="email"
               value={email}
-              className="rounded-lg bg-custom-blue border font-normal text-[22px] text-white p-[8px] border-white w-full focus:outline-none"
+              className="rounded-lg bg-custom-blue border font-normal text-[20px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setEmail(e.target.value)}
               onFocus={() => setEmailClicked(true)}
               onBlur={(e) => setEmailClicked(e.target.value !== '')}
@@ -87,7 +87,7 @@ const SignIn = () => {
 
           <div className='relative mb-6'>
             <label
-              className={`absolute left-3 top-[15px] bg-custom-blue text-white  font-medium transition-transform duration-300 transform ${passwordClicked || password ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
+              className={`absolute left-3 top-[12px] bg-custom-blue text-white  font-medium transition-transform duration-300 transform ${passwordClicked || password ? 'scale-85 -translate-y-[28px] translate-x-[5px]' : ''
                 }`}
               htmlFor="password"
               onClick={() => setPasswordClicked(true)}
@@ -98,7 +98,7 @@ const SignIn = () => {
               type="password"
               id="password"
               value={password}
-              className="rounded-lg bg-custom-blue border font-normal text-[22px] text-white p-[8px] border-white w-full focus:outline-none"
+              className="rounded-lg bg-custom-blue border font-normal text-[20px] text-white p-[8px] border-white w-full focus:outline-none"
               onChange={(e) => setPassword(e.target.value)}
               onFocus={() => setPasswordClicked(true)}
               onBlur={(e) => setPasswordClicked(e.target.value !== '')}

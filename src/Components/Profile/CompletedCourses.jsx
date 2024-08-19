@@ -80,7 +80,7 @@ const ShowCompletedCourses = () => {
       <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Academic History</h2>
 
       <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
-      <nav className='bg-custom-blue rounded-lg w-[85%] xsx:w-[55%] p-[8px] flex justify-around mt-[10px]  mx-auto text-md xsx:text-xl'>
+      <nav className='bg-custom-blue rounded-lg w-[85%] xsx:w-[55%] p-[8px] flex justify-around mt-[10px]  mx-auto text-[12px] sm:text-md xsx:text-xl'px>
         <button
           onClick={() => setShowCompletedCourses(true)}
           className={`rounded-lg border-2 border-custom-blue hover:border-white p-[10px] ${showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>

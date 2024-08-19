@@ -133,7 +133,7 @@ const EnrolledCourses = () => {
 
                         <td className="whitespace-nowrap text-center font-bold  px-6 py-4">
                           {enrolledCourses.includes(course.id) ? (
-                            <button disabled className="whitespace-nowrap bg-gray-500 text-md py-[8px] px-[12px] font-semibold text-white rounded-xl">Enrolled</button>
+                            <button disabled className="whitespace-nowrap bg-gray-500 text-md py-[8px] px-[12px] font-semibold text-white rounded-xl">Applied</button>
                           ) : (
                             <button onClick={() => handleEnroll(course.id)} className="whitespace-nowrap bg-custom-blue hover:bg-white border-2 hover:text-custom-blue text-md py-[8px] px-[25px] font-semibold text-white rounded-xl">Enroll</button>
                           )}

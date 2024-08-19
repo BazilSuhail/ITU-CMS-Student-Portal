@@ -36,7 +36,7 @@ const SemesterGpa = () => {
   }, []);
 
   const data = {
-    labels: results.map(result => `Semester ${result.semester}`),
+    labels: results.map(result => `Sem ${result.semester}`),
     datasets: [
       {
         label: 'GPA',
