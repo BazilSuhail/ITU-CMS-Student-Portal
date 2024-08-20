@@ -10,7 +10,7 @@ import { PiHandWithdrawLight } from "react-icons/pi";
 import { ImCross } from "react-icons/im";
 import { RiMenu3Line } from "react-icons/ri";
 
-import logo from "./itu.png";
+import logo from "../Assets/itu.png";
 import profile from "../Assets/Profile1.png";
 
 const Navbar = () => {

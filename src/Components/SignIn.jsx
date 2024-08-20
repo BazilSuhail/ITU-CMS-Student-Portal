@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { auth, fs } from '../Config/Config';
-import logo from "./itu.png";
+import logo from "../Assets/itu.png";
 import { useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 
