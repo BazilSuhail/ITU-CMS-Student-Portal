@@ -152,9 +152,9 @@ const Navbar = () => {
             </button>
 
             <div className="w-[100%] flex">
-              <img src={profile} alt="" className="ml-[15px] w-[70px] h-[70px]" />
-              <div className="ml-[20px]">
-                <div className="text-white mt-[13px] mb-[-5px] text-[14px] text-center">Welcome,</div>
+              <img src={profile} alt="" className="ml-[15px] w-[65px] h-[65px] mt-[8px]" />
+              <div className="ml-[15px] flex flex-col justify-start items-start">
+                <div className="text-white mt-[13px] mb-[-5px] text-[12px] text-center">Welcome,</div>
 
                 {loading ? (
                   <p className="text-white text-[27px] text-center">Loading name...</p>

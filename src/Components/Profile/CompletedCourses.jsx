@@ -66,7 +66,6 @@ const ShowCompletedCourses = () => {
   }, []);
 
   useEffect(() => {
-    // Sum the credit hours whenever completedCourses changes
     const calculateTotalCreditHours = () => {
       const totalHours = completedCourses.reduce((acc, course) => acc + parseInt(course.creditHours, 10), 0);
       setTotalCreditHours(totalHours);
@@ -76,25 +75,26 @@ const ShowCompletedCourses = () => {
   }, [completedCourses]);
 
   return (
-    <div className='ml-[10px] xsx:ml-[285px] mr-[12px] flex flex-col'>
+    <div className='ml-[10px] overflow-hidden xsx:ml-[285px] mr-[12px] flex flex-col'>
       <h2 className='text-custom-blue my-[12px] border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Academic History</h2>
 
-      <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
-      <nav className='bg-custom-blue rounded-lg w-[85%] xsx:w-[55%] p-[8px] flex justify-around mt-[10px]  mx-auto text-[12px] sm:text-md xsx:text-xl'px>
+      <div className='w-full mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
+
+      <nav className='bg-custom-blue rounded-lg px-[18px] py-[8px] flex justify-around mt-[10px] mr-auto text-[12px] sm:text-md xsx:text-[15px]' px>
         <button
           onClick={() => setShowCompletedCourses(true)}
-          className={`rounded-lg border-2 border-custom-blue hover:border-white p-[10px] ${showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
+          className={`rounded-lg border-2  px-[15px] border-custom-blue  p-[4px] ${showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
           Completed Courses
         </button>
         <button
           onClick={() => setShowCompletedCourses(false)}
-          className={`rounded-lg border-2 border-custom-blue hover:border-white p-[10px] ${!showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
+          className={`rounded-lg border-2   px-[15px] border-custom-blue   p-[4px] ${!showCompletedCourses ? 'bg-custom-back-grey text-white' : 'bg-transparent text-white'}`}>
           Current Courses
         </button>
       </nav>
 
       {loading ? (
-        <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-285px)] xsx:h-[calc(100vh-285px)] w-screen flex flex-col justify-center items-center'>
+        <div className='h-[calc(100vh-285px)] xsx:h-[calc(100vh-285px)] w-screen flex flex-col justify-center items-center'>
           <Circles
             height="48"
             width="48"
@@ -110,33 +110,33 @@ const ShowCompletedCourses = () => {
       ) : showCompletedCourses ? (
         <>
 
-          <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[12px] gap-x-2 p-[15px] my-[20px]'>
-            
+          <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[12px] gap-x-2 py-[15px] my-[20px]'>
 
-            <div className='  bg-custom-blue font-extrabold rounded-2xl text-white mx-auto p-[15px] w-[90%]'>
-              <div className='text-center text-md font-bold'>Total Credit Hours Earned</div>
-              <div className='text-4xl text-center'>{totalCreditHours}</div>
+
+            <div className='  bg-custom-blue rounded-2xl text-white mx-auto p-[15px] w-full'>
+              <div className='text-[13px] text-gray-400 font-[600]'>Total Credit Hours Earned</div>
+              <div className='text-[35px] font-[600]'>{totalCreditHours}</div>
             </div>
 
-
-            <div className='  bg-custom-blue font-extrabold rounded-2xl text-white mx-auto p-[15px] w-[90%]'>
-              <div className='text-center text-md font-bold'>Total Completed Courses</div>
-              <div className='text-4xl text-center'>{completedCourses.length}</div>
+            <div className='  bg-custom-blue rounded-2xl text-white mx-auto p-[15px] w-full'>
+              <div className='text-[13px] text-gray-400 font-[600]'>Total Completed Courses</div>
+              <div className='text-[35px] font-[600]'>{completedCourses.length}</div>
             </div>
 
-            <div className='  bg-custom-blue rounded-2xl font-extrabold text-white mx-auto p-[15px] w-[90%]'>
-              <div className=' text-center text-md font-bold'>Cumulative GPA</div>
-              <div className='text-4xl  text-center '>{cumulativeGPA.toFixed(2)}</div>
+            <div className='  bg-custom-blue rounded-2xl text-white mx-auto p-[15px] w-full'>
+              <div className='text-[13px] text-gray-400 font-[600]'>Cumulative GPA</div>
+              <div className='text-[35px] font-[600]'>{cumulativeGPA.toFixed(2)}</div>
             </div>
+ 
           </div>
 
           {semesterGPAs.length > 0 ? (
-            <div className='mb-[8px] flex flex-col w-[100%] px-[8px] bg-custom-blue text-white rounded-xl'>
-                  <div className='flex mb-[15px] ml-[15px] items-center rounded-lg text-[22px]'>
-                  <IoBarChartOutline size={29}/>
-                  <h2 className='ml-[7px] font-medium '>Grade Point Averages</h2>
+            <div className='mb-[8px] flex flex-col w-full pt-[15px] px-[8px] bg-custom-blue text-white rounded-xl'>
+              <div className='flex mb-[25px] ml-[15px] items-center rounded-lg text-[22px]'>
+                <IoBarChartOutline size={26} />
+                <h2 className='ml-[7px] text-[17px] font-medium '>Grade Point Averages</h2>
               </div>
-
+<div className='w-full h-[15px]'></div>
               <SemesterGpa />
             </div>
 
