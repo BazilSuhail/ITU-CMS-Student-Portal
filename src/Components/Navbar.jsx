@@ -75,13 +75,13 @@ const Navbar = () => {
       {/* Navbar for larger screens */}
       <div className="mt-[6px] fixed hidden xsx:flex xsx:flex-col xsx:justify-between shadow-xl rounded-2xl m-[10px] xsx:items-center w-[260px] h-[98vh] bg-custom-blue p-[10px]">
         <div className="mt-[8px] w-[100%] flex">
-          <img src={profile} alt="" className="ml-[25px] border-[3px] border-custom-back-grey rounded-full w-[70px] h-[70px] " />
-          <div className="ml-[20px]">
-            <div className="text-white ml-[0px] mt-[10px] text-md text-center">Welcome,</div>
+          <img src={profile} alt="" className="ml-[5px] border-[3px] border-custom-back-grey mt-[3px] rounded-full w-[65px] h-[65px] " />
+          <div className="ml-[15px] flex flex-col justify-start items-start">
+            <div className="text-white text-[12px] mt-[10px] text-md text-center">Welcome,</div>
             {loading ? (
               <p className="text-white text-sm text-center">Loading name...</p>
             ) : (
-                <p className="text-white text-3xl text-center">{firstName}!</p>
+                <p className="text-white text-[28px] text-center">{firstName}!</p>
             )}
 
           </div>
@@ -90,7 +90,7 @@ const Navbar = () => {
           <NavLink
             to="/student-profile"
             className={({ isActive }) =>
-              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
             }
           >
             <PiStudentDuotone className="text-custom-sz mr-2" />
@@ -100,7 +100,7 @@ const Navbar = () => {
           <NavLink
             to="/completedcourses"
             className={({ isActive }) =>
-              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
             }
           >
             <LuBookOpen className="text-custom-sz mr-2" />
@@ -109,7 +109,7 @@ const Navbar = () => {
           <NavLink
             to="/attendance"
             className={({ isActive }) =>
-              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
             }
           >
             <TbSquareRoundedPercentage className="text-custom-sz mr-2" />
@@ -119,7 +119,7 @@ const Navbar = () => {
           <NavLink
             to="/viewmarks"
             className={({ isActive }) =>
-              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+              `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
             }>
             <IoMdBookmarks className="text-custom-sz mr-2" />
             <p>Marks</p>
@@ -129,10 +129,10 @@ const Navbar = () => {
 
           <div className="ml-[6px] text-lg mb-[14px]">Checkout</div>
 
-          <NavLink to="/enrollcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-bold  text-sm  text-white rounded-md p-[8px] w-[90%] flex flex-row "> <MdScreenRotation className="mb-[5px] mr-[4px] text-custom-size" /><p className="mt-[2px]">Enroll Courses</p></NavLink>
-          <NavLink to="/withdrawcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-bold  text-sm  text-white rounded-md p-[8px] w-[90%] flex flex-row "> <PiHandWithdrawLight className="mb-[5px] mr-[4px] text-custom-size" /><p className="mt-[2px]">Withdraw Courses</p></NavLink>
+          <NavLink to="/enrollcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-[600]  text-sm  text-white rounded-md p-[8px] w-[90%] flex flex-row "> <MdScreenRotation className="mb-[5px] mr-[4px] text-custom-size" /><p className="mt-[2px]">Enroll Courses</p></NavLink>
+          <NavLink to="/withdrawcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-[600]  text-sm  text-white rounded-md p-[8px] w-[90%] flex flex-row "> <PiHandWithdrawLight className="mb-[5px] mr-[4px] text-custom-size" /><p className="mt-[2px]">Withdraw Courses</p></NavLink>
         </div>
-        <button onClick={handleLogout} className="text-2xl mb-[10px] p-[8px] font-bold w-[90%] text-white bg-red-800 rounded-lg ">Logout</button>
+        <button onClick={handleLogout} className="text-[18px] mb-[10px] py-[6px] font-[600] w-[90%] text-white bg-red-800 rounded-lg ">Logout</button>
       </div>
 
       {/* Navbar for small screens */}
@@ -145,7 +145,7 @@ const Navbar = () => {
 
       {/* Conditionally render the first div for smaller screens */}
       {!isXsx && isOpen && (
-        <div className="w-[100vw] fixed h-[100vh] flex backdrop-filter-lg z-50 bg-[white]/40 backdrop-blur-[150px] justify-center items-center">
+        <div className="w-[100vw] fixed h-[100vh] flex backdrop-filter-lg z-50 bg-[white]/40 backdrop-blur-[5px] justify-center items-center">
           <div className={`z-40 flex flex-col justify-between items-center w-[320px] mt-[-125px] h-[80vh] bg-custom-blue p-[10px] shadow-xl rounded-2xl mx-[10px] transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <button className="bg-red-500 cursor-pointer text-white rounded-full p-[8px] ml-auto mb-[-85px]" onClick={toggleNavbar}>
               <ImCross size={12} />
@@ -154,11 +154,12 @@ const Navbar = () => {
             <div className="w-[100%] flex">
               <img src={profile} alt="" className="ml-[15px] w-[70px] h-[70px]" />
               <div className="ml-[20px]">
-                <div className="text-white ml-[-15px] mt-[13px] mb-[-5px] text-sm text-center">Welcome,</div>
+                <div className="text-white mt-[13px] mb-[-5px] text-[14px] text-center">Welcome,</div>
+
                 {loading ? (
-                  <p className="text-white text-4xl ml-[-5px] text-center">Loading name...</p>
+                  <p className="text-white text-[27px] text-center">Loading name...</p>
                 ) : (
-                  <div className="text-white text-4xl ml-[-5px] text-center">{firstName} !!</div>
+                  <div className="text-white mt-[5px] text-[27px] text-center">{firstName} !!</div>
                 )}
               </div>
             </div>
@@ -167,7 +168,7 @@ const Navbar = () => {
               <NavLink
                 to="/student-profile" onClick={toggleNavbar}
                 className={({ isActive }) =>
-                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
                 }
               >
                 <PiStudentDuotone className="text-custom-sz mr-2" />
@@ -177,7 +178,7 @@ const Navbar = () => {
               <NavLink
                 to="/completedcourses" onClick={toggleNavbar}
                 className={({ isActive }) =>
-                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
                 }
               >
                 <LuBookOpen className="text-custom-sz mr-2" />
@@ -187,7 +188,7 @@ const Navbar = () => {
               <NavLink
                 to="/attendance" onClick={toggleNavbar}
                 className={({ isActive }) =>
-                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
                 }
               >
                 <TbSquareRoundedPercentage className="text-custom-sz mr-2" />
@@ -197,7 +198,7 @@ const Navbar = () => {
               <NavLink onClick={toggleNavbar}
                 to="/viewmarks"
                 className={({ isActive }) =>
-                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-bold my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-bold text-white'}`
+                  `flex items-center p-2 rounded-md text-md ${isActive ? 'bg-custom-back-grey text-white font-[600] my-[6px]' : 'my-[6px] hover:bg-custom-back-grey hover:rounded-2xl hover:font-[600] text-white'}`
                 }
               >
                 <IoMdBookmarks className="text-custom-sz mr-2" />
@@ -208,18 +209,18 @@ const Navbar = () => {
 
               <div className="ml-[6px] text-lg mb-[14px]">Checkout</div>
 
-              <NavLink onClick={toggleNavbar} to="/enrollcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-bold text-sm text-white rounded-md p-[8px] w-[90%] flex flex-row">
+              <NavLink onClick={toggleNavbar} to="/enrollcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-[600] text-sm text-white rounded-md p-[8px] w-[90%] flex flex-row">
                 <MdScreenRotation className="mb-[5px] mr-[4px] text-custom-size" />
                 <p className="mt-[2px]">Enroll Courses</p>
               </NavLink>
 
-              <NavLink onClick={toggleNavbar} to="/withdrawcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-bold text-sm text-white rounded-md p-[8px] w-[90%] flex flex-row">
+              <NavLink onClick={toggleNavbar} to="/withdrawcourses" className="ml-[15px] mt-[6px] hover:bg-custom-back-grey hover:rounded-xl hover:font-[600] text-sm text-white rounded-md p-[8px] w-[90%] flex flex-row">
                 <PiHandWithdrawLight className="mb-[5px] mr-[4px] text-custom-size" />
                 <p className="mt-[2px]">Withdraw Courses</p>
               </NavLink>
             </div>
 
-            <button onClick={handleLogout} className="text-2xl mb-[10px] p-[8px] font-bold w-[90%] text-white bg-red-800 rounded-lg">
+            <button onClick={handleLogout} className="text-[16px] mb-[10px] p-[8px] font-[600] w-[90%] text-white bg-red-800 rounded-lg">
               Logout
             </button>
           </div>

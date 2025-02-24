@@ -96,8 +96,8 @@ const ShowCompletedCourses = () => {
       {loading ? (
         <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-285px)] xsx:h-[calc(100vh-285px)] w-screen flex flex-col justify-center items-center'>
           <Circles
-            height="60"
-            width="60"
+            height="48"
+            width="48"
             color="rgb(0, 63, 146)"
             ariaLabel="circles-loading"
             wrapperStyle={{}}

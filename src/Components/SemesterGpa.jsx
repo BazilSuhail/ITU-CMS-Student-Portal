@@ -104,10 +104,4 @@ const SemesterGpa = () => {
   );
 };
 
-export default SemesterGpa;
-/*results.map((result, index) => (
-            <div key={index} className="result">
-              <div>GPA: {result.gpa}</div>
-              <div>Semester: {result.semester}</div>
-            </div>
-          ))*/
+export default SemesterGpa; 

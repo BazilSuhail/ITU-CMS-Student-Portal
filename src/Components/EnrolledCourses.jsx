@@ -99,8 +99,8 @@ const EnrolledCourses = () => {
       {loading ? (
         <div className='xsx:w-[calc(98vw-285px)] h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
           <Circles
-            height="60"
-            width="60"
+            height="48"
+            width="48"
             color="rgb(0, 63, 146)"
             ariaLabel="circles-loading"
             wrapperStyle={{}}

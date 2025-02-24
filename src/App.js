@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, useNavigate, Routes, Route } from "react-router-dom";
 import { auth } from "./Config/Config"; // Import Firebase auth
 import Navbar from "./Components/Navbar"; // Assuming Navbar is not lazy-loaded
+import { Circles } from "react-loader-spinner";
 
 // Lazy load components
 const SignIn = lazy(() => import("./Components/SignIn"));
@@ -43,35 +44,24 @@ const DefaultRoute = () => {
   }
 
   return null;
-};
-// Fallback component to display while loading
-const Loading = () => (
-  <div className=" lg:pl-[285px] overflow-hidden w-full  xsx:h-screen animate-fadeInOut p-[5px] md:p-[15px]">
-    
-    <div className="w-full my-[15px] flex"> 
-      <div className="w-[100%] ml-auto rounded-[15px] h-[85px] mr-[15px] bg-custom-blue"></div>
-      <div className="w-[85px] rounded-full h-[85px]  bg-custom-blue"></div>
-    </div> 
-    <div className="w-full mt-[10px] flex"> 
-      <div className="w-[38%] ml-auto rounded-[10px] h-[385px] lg:h-[455px] mr-[15px] bg-custom-blue"></div>
-      <div className="w-[62%]  mr-auto rounded-[12px]] h-[385px] lg:h-[455px] bg-custom-blue"></div>
-    </div> 
-    <div className="w-full my-[4px] flex"> 
-      <div className="w-[28%]  rounded-[20px] h-[85px] mr-[5px] bg-custom-blue"></div>
-      <div className="w-[75%] rounded-[18px] h-[85px]  bg-custom-blue"></div>
-    </div>  
-    <div className="w-full my-[2px] flex"> 
-      <div className="w-[100%]  rounded-[15px] h-[35px] mx-auto bg-custom-blue"></div> 
-    </div> 
-  </div>
-);
+}; 
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      <Suspense fallback={<Loading />}>
-        <Routes> 
+      <Suspense fallback={<div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-195px)] xsx:h-[calc(100vh-85px)] w-screen flex flex-col justify-center items-center'>
+        <Circles
+          height="60"
+          width="60"
+          color="rgb(0, 63, 146)"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>}>
+        <Routes>
           <Route path="/" element={<DefaultRoute />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/student-profile" element={<StudentProfile />} />

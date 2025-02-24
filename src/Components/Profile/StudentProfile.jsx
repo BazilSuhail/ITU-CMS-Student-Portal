@@ -59,8 +59,8 @@ const StudentProfile = () => {
       {loading ? (
         <div className='xsx:w-[calc(98vw-285px)] h-[calc(100vh-195px)] xsx:h-[calc(100vh-85px)] w-screen flex flex-col justify-center items-center'>
           <Circles
-            height="60"
-            width="60"
+            height="48"
+            width="48"
             color="rgb(0, 63, 146)"
             ariaLabel="circles-loading"
             wrapperStyle={{}}
@@ -74,14 +74,14 @@ const StudentProfile = () => {
       ) : userData ? (
         <div>
           <div className='bg-gray-200 border-2 border-gray-200 mb-[15px] rounded-lg'>
-            <p className='text-xl xsx:text-2xl font-bold ml-[9px] text-gray-700 p-[7px]'>Academic Information:</p>
+            <p className='text-xl xsx:text-[18px] font-bold xl:ml-[9px] text-gray-700 mt-[10px] px-[7px]'>Academic Information:</p>
 
             <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[8px] p-[15px]'>
               <div className='bg-blue-950 rounded-2xl text-white p-[15px] w-full flex flex-row xsx:w-[90%]'>
                 <FaUserGraduate className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Roll Number:</p>
-                  <p className='font-medium text-gray-200 text-[22px]'>{userData.rollNumber}</p>
+                  <p className='font-medium mt-[6px] text-gray-200 text-[18px]'>{userData.rollNumber}</p>
                 </div>
               </div>
 
@@ -89,7 +89,7 @@ const StudentProfile = () => {
                 <FaEnvelope className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Email:</p>
-                  <p className='font-medium text-gray-200 lg:text-[15px] text-[22px] xl:text-[22px]'>{userData.email}</p>
+                  <p className='font-medium mt-[6px] text-gray-200 lg:text-[15px] text-[22px] xl:text-[18px]'>{userData.email}</p>
                 </div>
               </div>
 
@@ -97,7 +97,7 @@ const StudentProfile = () => {
                 <FaCalendarAlt className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Batch:</p>
-                  <p className='font-medium text-gray-200 text-[22px]'>{userData.batch}</p>
+                  <p className='font-medium mt-[6px] text-gray-200 text-[18px]'>{userData.batch}</p>
                 </div>
               </div>
 
@@ -105,7 +105,7 @@ const StudentProfile = () => {
                 <FaUniversity className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Semester:</p>
-                  <p className='font-medium text-gray-200 text-[22px]'>{userData.semester}</p>
+                  <p className='font-medium mt-[6px]   text-gray-200 text-[18px]'>{userData.semester}</p>
                 </div>
               </div>
 
@@ -113,7 +113,7 @@ const StudentProfile = () => {
                 <FaGraduationCap className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Degree Program:</p>
-                  <p className='font-medium text-gray-200 lg:text-[15px] text-[22px] xl:text-[22px]'>{userData.degreeProgram}</p>
+                  <p className='font-medium mt-[6px] text-gray-200 lg:text-[15px] text-[22px] xl:text-[18px]'>{userData.degreeProgram}</p>
                 </div>
               </div>
 
@@ -121,7 +121,7 @@ const StudentProfile = () => {
                 <FaChalkboardTeacher className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='font-bold text-gray-300 text-[12px]'>Class:</p>
-                  <p className='font-medium text-gray-200 text-[22px]'>{className}</p>
+                  <p className='font-medium mt-[6px] text-gray-200 text-[18px]'>{className}</p>
                 </div>
               </div>
 
@@ -129,14 +129,14 @@ const StudentProfile = () => {
               </div>
               
           <div className='bg-gray-200 border-2 border-gray-200 mb-[15px] rounded-lg'>
-            <p className='text-xl xsx:text-2xl font-bold xl:ml-[9px] text-gray-700 p-[7px]'>Personal Information:</p>
+            <p className='text-xl xsx:text-[18px] font-bold xl:ml-[9px] text-gray-700 mt-[10px] px-[7px]'>Personal Information:</p>
             <div className='grid grid-cols-1 xsx:grid-cols-3 gap-y-[8px] xl:gap-y-4 p-[15px]'>
 
               <div className='bg-white rounded-2xl text-custom-blue p-[15px] w-full xsx:w-[90%] flex flex-row'>
                 <FaUser className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>Name:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.name}</p>
+                  <p className='text-[18px] font-medium text-gray-800 '>{userData.name}</p>
                 </div>
               </div>
 
@@ -144,7 +144,7 @@ const StudentProfile = () => {
                 <FaIdBadge className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>Father's Name:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.fatherName}</p>
+                  <p className='text-[18px] font-medium text-gray-800 '>{userData.fatherName}</p>
                 </div>
               </div>
 
@@ -152,7 +152,7 @@ const StudentProfile = () => {
                 <FaMale className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>Gender:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.gender}</p>
+                  <p className='text-[18px] font-medium text-gray-800 '>{userData.gender}</p>
                 </div>
               </div>
 
@@ -160,7 +160,7 @@ const StudentProfile = () => {
                 <FaCity className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>City:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.city}</p>
+                  <p className='text-[18px] font-medium text-gray-800 '>{userData.city}</p>
                 </div>
               </div>
 
@@ -168,7 +168,7 @@ const StudentProfile = () => {
                 <FaGlobeAmericas className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>Country:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.country}</p>
+                  <p className='text-[19px] font-medium text-gray-800 '>{userData.country}</p>
                 </div>
               </div>
 
@@ -176,15 +176,15 @@ const StudentProfile = () => {
                 <FaFlag className='mr-[5px] text-[44px] text-gray-100 bg-gray-500 p-[9px] rounded-full' />
                 <div className='ml-[15px]'>
                   <p className='text-[12px] font-semibold text-gray-400'>Nationality:</p>
-                  <p className='text-[22px] font-medium text-gray-800 '>{userData.nationality}</p>
+                  <p className='text-[18px] font-medium text-gray-800 '>{userData.nationality}</p>
                 </div>
               </div>
             </div>
           </div>
 
 
-          <div className=' py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Current Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg px-[20px]  font-normal  '>{userData.currentAddress}</div></div>
-          <div className='py-[7px] pl-[15px] m-[5px] text-sm xsx:text-lg font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Permanent Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg  px-[20px] font-normal '>{userData.permanentAddress}</div></div>
+          <div className=' py-[7px] pl-[15px] m-[5px] text-sm xsx:text-[16px] font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Current Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg px-[20px]  font-normal  '>{userData.currentAddress}</div></div>
+          <div className='py-[7px] pl-[15px] m-[5px] text-sm xsx:text-[16px] font-medium bg-blue-950 rounded-lg text-blue-100 flex w-[100%] items-center'>Permanent Address: <div className='ml-[2px] mb-[4px] text-white text-md xsx:text-lg  px-[20px] font-normal '>{userData.permanentAddress}</div></div>
 
           <CurrentCourses currentCoursesIds={userData.currentCourses || []} />
         </div>
