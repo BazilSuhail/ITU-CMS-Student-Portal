@@ -1,4 +1,4 @@
-# ITU University Management System (Student Portal)
+## ITU University Management System (Student Portal)
 The Student University Management System offers students seamless access to academic information, including course enrollments, results, and attendance. With real-time updates, dynamic course statistics, and easy navigation, students can track progress and submit enrollment or withdrawal requests to their departments efficiently.
 
 This is the **client-side** of the project, built using **React** to create a dynamic and responsive user interface along with React-supported technologies and kits.
@@ -6,7 +6,7 @@ This is the **client-side** of the project, built using **React** to create a dy
 - Developed using **Tailwind CSS** for fast, modern, and fully responsive UI with a utility-first design approach.
 - Used **Firebase Firestore** for database storage and **Firebase Backend Services** to manage and store student academic records, enrollment data, and request submissions efficiently.
 - Implemented **Firebase Authentication** for secure user login and signup, ensuring protected access to student data.
-- Utilized **Framer Motion** for smooth animations and transitions to ensure a polished and engaging user experience.
+- Used **Chart.js** to visually display GPA records, course statistics, and academic progress in an interactive and easy-to-understand format.
 
 These technologies combine to create an interactive and seamless interface for effective project collaboration.
 
